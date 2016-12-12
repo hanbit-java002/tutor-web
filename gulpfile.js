@@ -190,7 +190,8 @@ gulp.task('archive', function (done) {
 
 gulp.task('build', function (done) {
     runSequence(
-        ['clean', 'lint:js', 'compress'],
+        ['clean', 'lint:js'],
+        'compress',
         'copy',
     done);
 });
