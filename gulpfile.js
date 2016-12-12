@@ -100,6 +100,8 @@ gulp.task('copy:bootstrap-css', function () {
 
 gulp.task('copy:bootstrap-js', function () {
     return gulp.src(['node_modules/bootstrap/dist/js/bootstrap.js'])
+        .pipe(uglify())
+        .pipe(plugins.rename('bootstrap.min.js'))
         .pipe(gulp.dest(dirs.dist + '/js/vendor/bootstrap/js'));
 });
 
