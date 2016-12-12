@@ -20,7 +20,8 @@
     "mocha": "^2.2.4",
     "normalize.css": "3.0.3",
     "run-sequence": "^1.0.2",
-    "pump": "^1.0.1"
+    "pump": "^1.0.1",
+    "bootstrap": "^3.0.0"
   },
   "engines": {
     "node": ">=0.10.0"
