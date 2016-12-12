@@ -27,4 +27,14 @@ $(function() {
     };
 
     console.log(printStudents());
+
+    $("#clickme").click(function() {
+        $(this).animate({
+            left: "+=500",
+            top: "+=200",
+            opacity: 0.1
+        }, 5000, function() {
+            // Animation complete.
+        });
+    });
 });
