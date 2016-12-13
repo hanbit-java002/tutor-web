@@ -6,6 +6,7 @@
     "del": "^2.0.2",
     "glob": "^6.0.1",
     "gulp": "^3.9.1",
+    "gulp-all": "^1.1.0",
     "gulp-autoprefixer": "^3.0.2",
     "gulp-header": "^1.2.2",
     "gulp-jscs": "^3.0.1",
@@ -21,7 +22,8 @@
     "normalize.css": "3.0.3",
     "run-sequence": "^1.0.2",
     "pump": "^1.0.1",
-    "bootstrap": "^3.0.0"
+    "bootstrap": "^3.0.0",
+    "requirejs": "^2.3.2"
   },
   "engines": {
     "node": ">=0.10.0"

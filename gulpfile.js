@@ -2,6 +2,7 @@ var fs = require('fs');
 var path = require('path');
 
 var gulp = require('gulp');
+var all = require('gulp-all');
 
 // Load all gulp plugins automatically
 // and attach them to the `plugins` object
@@ -72,9 +73,7 @@ gulp.task('clean', function (done) {
 gulp.task('copy', [
     'copy:.htaccess',
     'copy:jquery',
-    'copy:bootstrap-css',
-    'copy:bootstrap-js',
-    'copy:bootstrap-fonts',
+    'copy:bootstrap',
     'copy:license',
     'copy:css',
     'copy:misc',
@@ -93,21 +92,17 @@ gulp.task('copy:jquery', function () {
                .pipe(gulp.dest(dirs.dist + '/js/vendor'));
 });
 
-gulp.task('copy:bootstrap-css', function () {
-    return gulp.src(['node_modules/bootstrap/dist/css/bootstrap.min.css'])
-        .pipe(gulp.dest(dirs.dist + '/js/vendor/bootstrap/css'));
-});
-
-gulp.task('copy:bootstrap-js', function () {
-    return gulp.src(['node_modules/bootstrap/dist/js/bootstrap.js'])
-        .pipe(uglify())
-        .pipe(plugins.rename('bootstrap.min.js'))
-        .pipe(gulp.dest(dirs.dist + '/js/vendor/bootstrap/js'));
-});
-
-gulp.task('copy:bootstrap-fonts', function () {
-    return gulp.src(['node_modules/bootstrap/dist/fonts/*'])
-        .pipe(gulp.dest(dirs.dist + '/js/vendor/bootstrap/fonts'));
+gulp.task('copy:bootstrap', function () {
+    return all(
+        gulp.src(['node_modules/bootstrap/dist/css/bootstrap.min.css'])
+        .pipe(gulp.dest(dirs.dist + '/js/vendor/bootstrap/css')),
+        gulp.src(['node_modules/bootstrap/dist/js/bootstrap.js'])
+            .pipe(uglify())
+            .pipe(plugins.rename('bootstrap.min.js'))
+            .pipe(gulp.dest(dirs.dist + '/js/vendor/bootstrap/js')),
+        gulp.src(['node_modules/bootstrap/dist/fonts/*'])
+            .pipe(gulp.dest(dirs.dist + '/js/vendor/bootstrap/fonts'))
+    );
 });
 
 gulp.task('copy:license', function () {
