@@ -74,7 +74,9 @@ gulp.task('copy', [
     'copy:.htaccess',
     'copy:jquery',
     'copy:bootstrap',
+    'copy:font-awesome',
     'copy:license',
+    'copy:img',
     'copy:css',
     'copy:misc',
     'copy:normalize'
@@ -90,6 +92,15 @@ gulp.task('copy:jquery', function () {
     return gulp.src(['node_modules/jquery/dist/jquery.min.js'])
                .pipe(plugins.rename('jquery-' + pkg.devDependencies.jquery + '.min.js'))
                .pipe(gulp.dest(dirs.dist + '/js/vendor'));
+});
+
+gulp.task('copy:font-awesome', function() {
+   return all(
+        gulp.src(['node_modules/font-awesome/css/font-awesome.min.css'])
+            .pipe(gulp.dest(dirs.dist + '/js/vendor/font-awesome/css')),
+        gulp.src(['node_modules/font-awesome/fonts/*'])
+            .pipe(gulp.dest(dirs.dist + '/js/vendor/font-awesome/fonts'))
+   ) ;
 });
 
 gulp.task('copy:bootstrap', function () {
@@ -108,6 +119,11 @@ gulp.task('copy:bootstrap', function () {
 gulp.task('copy:license', function () {
     return gulp.src('LICENSE.txt')
                .pipe(gulp.dest(dirs.dist));
+});
+
+gulp.task('copy:img', function () {
+    return gulp.src(dirs.src + '/img/**/*')
+        .pipe(gulp.dest(dirs.dist + "/img"));
 });
 
 gulp.task('copy:css', function () {
@@ -133,6 +149,7 @@ gulp.task('copy:misc', function () {
 
         // Exclude the following files
         // (other tasks will handle the copying of these files)
+        '!' + dirs.src + '/img/**/*',
         '!' + dirs.src + '/css/**/*.css',
         '!' + dirs.src + '/js/**/*.js'
     ], {

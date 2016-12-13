@@ -1,40 +1,63 @@
-<!doctype html>
-<html class="no-js" lang="">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title></title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<!DOCTYPE html>
+<html class="no-js" lang="ko">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>한빛 플레이트</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <link rel="apple-touch-icon" href="apple-touch-icon.png">
-        <!-- Place favicon.ico in the root directory -->
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <!-- Place favicon.ico in the root directory -->
 
-        <link rel="stylesheet" href="css/normalize.css">
-        <link rel="stylesheet" href="css/main.css">
-        <script src="js/vendor/modernizr-2.8.3.min.js"></script>
-    </head>
-    <body>
-        <!--[if lt IE 8]>
-            <p class="browserupgrade">You are using an <strong>outdated!</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="js/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="js/vendor/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/common.css">
+    <link rel="stylesheet" href="css/main.css">
+    <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+</head>
+<body>
 
-        <!-- Add your site or application content here -->
-        <p>Hello world! This is HTML5 Boilerplate!</p>
+<div class="hp-container">
+    <div id="main-top">
+        <div class="layer-dark">
+            <div id="main-bar">
+                <div id="main-logo">
+                    HANBIT<br>PLATE
+                </div>
+                <div id="main-menu">
+                    <ul>
+                        <li>맛집리스트</li>
+                        <li>한빛스토리</li>
+                        <li><i class="fa fa-user-o"></i></li>
+                    </ul>
+                </div>
+            </div>
+            <div id="main-top-body">
+                <div id="main-text">
+                    주관적인 리뷰, 믿을 수 있는 평점!<br>
+                    한빛플레이트
+                </div>
+                <div id="main-search-box">
+                    <div id="main-search-form">
+                        <input id="main-search" type="text" placeholder="지역, 식당 또는 음식">
+                        <i class="fa fa-search"></i>
+                        <button id="main-search-btn">검색</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="main-content">
+        내용내용
+    </div>
+    <div class="hp-bottom"></div>
+</div>
 
-        <script src="https://code.jquery.com/jquery-{{JQUERY_VERSION}}.min.js"></script>
-        <script>window.jQuery || document.write('<script src="js/vendor/jquery-{{JQUERY_VERSION}}.min.js"><\/script>')</script>
-        <script src="js/plugins.js"></script>
-        <script src="js/main.js"></script>
-
-        <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
-        <script>
-            (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
-            function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
-            e=o.createElement(i);r=o.getElementsByTagName(i)[0];
-            e.src='https://www.google-analytics.com/analytics.js';
-            r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
-            ga('create','UA-XXXXX-X','auto');ga('send','pageview');
-        </script>
-    </body>
+<script src="js/plugins.js"></script>
+<script src="js/vendor/jquery-{{JQUERY_VERSION}}.min.js"></script>
+<script src="js/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="js/main.js"></script>
+</body>
 </html>
