@@ -18,11 +18,155 @@ html, body {
     height: 100%;
 }
 
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
 .layer-dark {
     position: relative;
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.2);
+}
+
+.layer-darker {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+footer {
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    height: 495px;
+    background-color: #3e3e3e;
+}
+
+.footer-box {
+    width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    color: #aaa;
+}
+
+.footer-box>div {
+    border-bottom: solid 1px #aaa;
+}
+
+.footer-box>div:last-child {
+    border: 0;
+}
+
+#footer-menu {
+    padding-top: 65px;
+    padding-bottom: 15px;
+}
+
+#footer-menu>div {
+    display: inline-block;
+    vertical-align: top;
+}
+
+#footer-logo {
+    width: 24.5%;
+}
+
+#footer-logo-ci {
+    font-size: 30px;
+    font-weight: bold;
+    line-height: 120%;
+    padding-bottom: 15px;
+}
+
+#footer-logo-divider {
+    width: 25px;
+    height: 1px;
+    background-color: #aaa;
+}
+
+#footer-logo-text {
+    padding-top: 15px;
+}
+
+#footer-menus {
+    width: 49.5%;
+}
+
+#footer-menus>ul {
+    display: inline-block;
+    vertical-align: top;
+    width: 49.5%;
+}
+
+#footer-menus>ul>li {
+    height: 35px;
+}
+
+#footer-sns {
+    width: 24.5%;
+    text-align: right;
+}
+
+#footer-sns>ul>li {
+    display: inline-block;
+    width: 45px;
+    height: 45px;
+    margin-left: 35px;
+    border: solid 1px #aaa;
+    border-radius: 22.5px;
+    text-align: center;
+    line-height: 45px;
+    cursor: pointer;
+}
+
+#footer-location {
+    padding: 20px 0px 30px 0px;
+}
+
+#footer-location>ul>li {
+    display: inline-block;
+    border-right: solid 1px #aaa;
+    padding-right: 5px;
+    line-height: 100%;
+}
+
+#footer-location>ul>li:first-child,
+#footer-location>ul>li:last-child {
+    border-right: 0;
+}
+
+#footer-info {
+    position: relative;
+    padding: 30px 0px;
+}
+
+#footer-language {
+    position: absolute;
+    top: 40px;
+    right: 0px;
+}
+
+#footer-language>ul>li {
+    display: inline-block;
+    border-right: solid 1px #aaa;
+    line-height: 100%;
+    padding: 0px 10px;
+}
+#footer-language>ul>li:first-child {
+    padding-left: 0;
+}
+
+#footer-language>ul>li:last-child {
+    border-right: 0;
+    padding-right: 0;
+}
+
+#footer-language>ul>li.active {
+    color: #fff;
 }
 
 /*
