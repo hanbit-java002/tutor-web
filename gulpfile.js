@@ -72,6 +72,7 @@ gulp.task('clean', function (done) {
 
 gulp.task('copy', [
     'copy:.htaccess',
+    'copy:requirejs',
     'copy:jquery',
     'copy:bootstrap',
     'copy:font-awesome',
@@ -101,6 +102,19 @@ gulp.task('copy:font-awesome', function() {
         gulp.src(['node_modules/font-awesome/fonts/*'])
             .pipe(gulp.dest(dirs.dist + '/js/vendor/font-awesome/fonts'))
    ) ;
+});
+
+gulp.task('copy:requirejs', function() {
+    return all(
+        gulp.src(['node_modules/requirejs/require.js'])
+            .pipe(uglify())
+            .pipe(plugins.rename('require.min.js'))
+            .pipe(gulp.dest(dirs.dist + '/js/vendor/requirejs')),
+        gulp.src([dirs.src + '/js/require.config.js'])
+            .pipe(plugins.replace(/{{JQUERY_VERSION}}/g, pkg.devDependencies.jquery))
+            .pipe(uglify())
+            .pipe(gulp.dest(dirs.dist + '/js'))
+    );
 });
 
 gulp.task('copy:bootstrap', function () {
@@ -158,7 +172,6 @@ gulp.task('copy:misc', function () {
         dot: true
 
     })
-        .pipe(plugins.replace(/{{JQUERY_VERSION}}/g, pkg.devDependencies.jquery))
         .pipe(gulp.dest(dirs.dist));
 });
 
@@ -180,7 +193,7 @@ gulp.task('lint:js', function () {
 
 gulp.task('compress', function (cb) {
     pump([
-            gulp.src(dirs.src + '/js/**/*.js'),
+            gulp.src([dirs.src + '/js/**/*.js', '!' + dirs.src + '/js/require.config.js']),
             uglify(),
             gulp.dest(dirs.dist + "/js")
         ],
