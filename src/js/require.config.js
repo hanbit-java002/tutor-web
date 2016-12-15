@@ -1,10 +1,10 @@
 require.config({
-    baseUrl: "/js",
+    baseUrl: "js",
 
     paths: {
-        "console"       : "/plugins",
-        "jquery"        : "/vendor/jquery-{{JQUERY_VERSION}}.min",
-        "bootstrap"     : "/vendor/bootstrap/js/bootstrap.min"
+        "console"       : "plugins",
+        "jquery"        : "vendor/jquery-{{JQUERY_VERSION}}.min",
+        "bootstrap"     : "vendor/bootstrap/js/bootstrap.min"
     },
 
     shim: {
