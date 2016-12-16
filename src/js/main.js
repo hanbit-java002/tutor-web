@@ -19,6 +19,7 @@ require([
             itemsPerPage: 8
         },
         "05": {
+            maxCategories: 6,
             items: [],
             itemsPerPage: 8
         }
@@ -126,6 +127,21 @@ require([
             });
         }
         else if (sectionCode === "03" || sectionCode === "04" || sectionCode === "05") {
+            if (sectionCode === "05") {
+                var categories = ["강남", "강북", "경기도", "인천", "대구", "제주", "부산", "대전"];
+
+                var maxCategories = sectionInfo[sectionCode].maxCategories;
+
+                for (var i=0;i<categories.length;i++) {
+                    if (i === maxCategories - 1 && categories.length > maxCategories) {
+                        $(".section-category>ul").append("<li>더보기</li>");
+                        break;
+                    }
+
+                    $(".section-category>ul").append("<li>" + categories[i] + "</li>");
+                }
+            }
+
             $.ajax({
                 url: url,
                 success: function(items) {
