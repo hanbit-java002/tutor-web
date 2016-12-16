@@ -2,37 +2,32 @@ require([
     "bootstrap"
 ], function () {
 
-    var items = [{
-        title: {
-            ko: "어제",
-            en: "Yesterday"
-        },
-        date: "2016-12-15"
-    }, {
-        title: {
-            ko: "오늘",
-            en: "Today"
-        },
-        date: "2016-12-16"
-    }, {
-        title: {
-            ko: "내일",
-            en: "Tommorow"
-        },
-        date: "2016-12-17"
-    }];
+    var data = {
+        greeting: "Hello",
+        students: [{
+            name: "이상윤",
+            gender: "남"
+        }, {
+            name: "조영욱",
+            gender: "남"
+        }, {
+            name: "백수현",
+            gender: "여"
+        }]
+    };
 
-    for (var i=0;i<items.length;i++) {
-        var item = items[i];
+    for (var i=0;i<data.students.length;i++) {
+        var gender = data.students[i].gender;
 
-        var html = "<li>" + item.title;
-
-        if (item.title !== "오늘") {
-            html += "(" + item.eng + ")";
+        if (gender === "남") {
+            gender = "male";
+        }
+        else {
+            gender = "female";
         }
 
-        html += " / " + item.date + "</li>";
-
-        $("ol").append(html);
+        $("ol").append("<li class=\"" + gender +"\">" +
+            data.greeting + ", " + data.students[i].name + "</li>");
     }
+
 });
