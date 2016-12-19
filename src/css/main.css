@@ -14,15 +14,30 @@
 }
 
 #main-bar {
-    position: relative;
+    position: fixed;
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    z-index: 10;
+    background-color: #fff;
+    border-bottom: solid 1px #ddd;
+}
+
+#main-bar.header-transparent {
+    background-color: transparent;
+    border-bottom: 0;
 }
 
 #main-logo {
-    color: #ffffff;
+    color: #ff792a;
     font-size: 20px;
     font-weight: bold;
     line-height: 115%;
     padding: 10px 20px;
+}
+
+.header-transparent #main-logo {
+    color: #ffffff;
 }
 
 #main-menu {
@@ -35,10 +50,14 @@
 #main-menu>ul>li {
     display: inline-block;
     margin-left: 40px;
-    color: #fff;
+    color: #aaa;
     font-size: 16px;
     font-weight: bold;
     vertical-align: middle;
+}
+
+.header-transparent #main-menu>ul>li {
+    color: #fff;
 }
 
 #main-menu>ul>li:last-child {
@@ -52,7 +71,7 @@
 #main-text {
     color: #fff;
     font-size: 35px;
-    padding: 50px 10px 40px 10px;
+    padding: 116px 10px 40px 10px;
 }
 
 #main-search-form {

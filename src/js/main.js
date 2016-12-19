@@ -128,18 +128,21 @@ require([
         }
         else if (sectionCode === "03" || sectionCode === "04" || sectionCode === "05") {
             if (sectionCode === "05") {
-                var categories = ["강남", "강북", "경기도", "인천", "대구", "제주", "부산", "대전"];
+                $.ajax({
+                    url: "/api/main/section/" + sectionCode + "/categories",
+                    success: function(categories) {
+                        var maxCategories = sectionInfo[sectionCode].maxCategories;
 
-                var maxCategories = sectionInfo[sectionCode].maxCategories;
+                        for (var i=0;i<categories.length;i++) {
+                            if (i === maxCategories - 1 && categories.length > maxCategories) {
+                                $(".section-category>ul").append("<li>더보기</li>");
+                                break;
+                            }
 
-                for (var i=0;i<categories.length;i++) {
-                    if (i === maxCategories - 1 && categories.length > maxCategories) {
-                        $(".section-category>ul").append("<li>더보기</li>");
-                        break;
+                            $(".section-category>ul").append("<li>" + categories[i] + "</li>");
+                        }
                     }
-
-                    $(".section-category>ul").append("<li>" + categories[i] + "</li>");
-                }
+                });
             }
 
             $.ajax({
@@ -163,6 +166,38 @@ require([
         timer = setTimeout(rotateMainImg, 3000);
     }
 
+    function addHotPlaces(hotPlaces) {
+        for (var i=0;i<hotPlaces.length;i++) {
+            $("#footer-location>ul").append("<li>" + hotPlaces[i] + "</li>");
+        }
+    }
+
+    function initHotPlaces() {
+        $.ajax({
+            url: "/api/common/hotplaces",
+            success: function(hotPlaces) {
+                addHotPlaces(hotPlaces);
+            }
+        });
+    }
+
+    function toggleHeader() {
+        if (document.body.scrollTop >= 430) {
+            $("#main-bar").removeClass("header-transparent");
+        }
+        else {
+            $("#main-bar").addClass("header-transparent");
+        }
+    }
+
+    $(window).on("scroll", function() {
+        toggleHeader();
+    });
+
+    /*** 아래는 실행 ***/
+
+    toggleHeader();
+
     timer = setTimeout(rotateMainImg, 3000);
 
     initSection("01");
@@ -170,4 +205,6 @@ require([
     initSection("03");
     initSection("04");
     initSection("05");
+
+    initHotPlaces();
 });

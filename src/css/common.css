@@ -130,6 +130,7 @@ footer {
 #footer-location>ul>li {
     display: inline-block;
     border-right: solid 1px #aaa;
+    padding-left: 5px;
     padding-right: 5px;
     line-height: 100%;
 }
@@ -137,6 +138,11 @@ footer {
 #footer-location>ul>li:first-child,
 #footer-location>ul>li:last-child {
     border-right: 0;
+    padding-right: 0;
+}
+
+#footer-location>ul>li:nth-child(2) {
+    padding-left: 0;
 }
 
 #footer-info {
