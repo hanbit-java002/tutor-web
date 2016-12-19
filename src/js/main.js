@@ -1,6 +1,9 @@
 require([
-    "bootstrap"
+    "common"
 ], function () {
+
+    var common = require("common");
+
     var sectionInfo = {
         "01": {
             items: [],
@@ -166,21 +169,6 @@ require([
         timer = setTimeout(rotateMainImg, 3000);
     }
 
-    function addHotPlaces(hotPlaces) {
-        for (var i=0;i<hotPlaces.length;i++) {
-            $("#footer-location>ul").append("<li>" + hotPlaces[i] + "</li>");
-        }
-    }
-
-    function initHotPlaces() {
-        $.ajax({
-            url: "/api/common/hotplaces",
-            success: function(hotPlaces) {
-                addHotPlaces(hotPlaces);
-            }
-        });
-    }
-
     function toggleHeader() {
         if (document.body.scrollTop >= 430) {
             $("#main-bar").removeClass("header-transparent");
@@ -206,5 +194,5 @@ require([
     initSection("04");
     initSection("05");
 
-    initHotPlaces();
+    common.initHotPlaces();
 });

@@ -27,6 +27,8 @@
 
     "browser": true,
     "jquery": true,
-    "node": true
+    "node": true,
+
+    "predef": ["define"]
 
 }
