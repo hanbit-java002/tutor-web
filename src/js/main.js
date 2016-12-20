@@ -59,6 +59,10 @@ require([
 
                 $(".section-contents.section" + sectionCode + ">ul").append(sectionHTML);
             }
+
+            $(".section-contents.section01>ul>li").on("click", function() {
+                location.href = "top_list.html";
+            });
         }
         else if (sectionCode === "02") {
             for (i=startIndex;i<endIndex;i++) {
@@ -86,6 +90,10 @@ require([
 
                 $(".section-contents.section" + sectionCode + ">ul").append(sectionHTML);
             }
+
+            $(".section-contents.section02>ul>li").on("click", function() {
+                location.href = "hanbit_picks.html";
+            });
         }
         else if (sectionCode === "03" || sectionCode === "04" || sectionCode === "05") {
             for (i=startIndex;i<endIndex;i++) {
@@ -107,6 +115,10 @@ require([
 
                 $(".section-contents.section" + sectionCode + ">ul").append(sectionHTML);
             }
+
+            $(".section-contents.section" + sectionCode + ">ul>li").on("click", function() {
+                location.href = "store.html";
+            });
         }
     }
 
@@ -178,9 +190,11 @@ require([
         }
     }
 
-    $(window).on("scroll", function() {
-        toggleHeader();
-    });
+    function handleEvents() {
+        $(window).on("scroll", function() {
+            toggleHeader();
+        });
+    }
 
     /*** 아래는 실행 ***/
 
@@ -195,4 +209,6 @@ require([
     initSection("05");
 
     common.initHotPlaces();
+
+    handleEvents();
 });

@@ -1,6 +1,10 @@
 define([
     "bootstrap"
 ], function () {
+    $("#main-logo").on("click", function() {
+        location.href = "/";
+    });
+
     function addHotPlaces(hotPlaces) {
         for (var i=0;i<hotPlaces.length;i++) {
             $("#footer-location>ul").append("<li>" + hotPlaces[i] + "</li>");
