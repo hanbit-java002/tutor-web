@@ -1,8 +1,10 @@
 require([
-    "common"
+    "common",
+    "clipboard"
 ], function () {
 
     var common = require("common");
+    var Clipboard = require("clipboard");
 
     function addItems(items, sectionCode) {
         var i, item, sectionHTML;
@@ -56,6 +58,37 @@ require([
                 $("#title-desc").html(topList.desc);
             }
         });
+
+        var clipboard = new Clipboard(".share-button");
+
+        clipboard.on("success", function() {
+            alert("페이지의 주소가 복사되었습니다.");
+        });
+
+        function initMap() {
+            var myLatLng = {
+                lat: 37.5526233,
+                lng: 126.9375131
+            };
+
+            // Create a map object and specify the DOM element for display.
+            var map = new google.maps.Map(document.getElementById("map"), {
+                center: myLatLng,
+                scrollwheel: false,
+                zoom: 17
+            });
+
+            // Create a marker and set its position.
+            var marker = new google.maps.Marker({
+                map: map,
+                position: myLatLng,
+                title: "거구장"
+            });
+
+            console.log(marker);
+        }
+
+        require(["async!https://maps.googleapis.com/maps/api/js?key=AIzaSyAHX_Y_cP2i1v9lchEPJ4yROwzh9nK6of0"], initMap);
     }
 
     function initRelatedArea() {

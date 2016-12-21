@@ -76,6 +76,7 @@ gulp.task('copy', [
     'copy:jquery',
     'copy:bootstrap',
     'copy:font-awesome',
+    'copy:clipboard',
     'copy:license',
     'copy:img',
     'copy:css',
@@ -130,9 +131,14 @@ gulp.task('copy:bootstrap', function () {
     );
 });
 
+gulp.task('copy:clipboard', function () {
+    return gulp.src('node_modules/clipboard/dist/clipboard.min.js')
+        .pipe(gulp.dest(dirs.dist + '/js/vendor/clipboard'));
+});
+
 gulp.task('copy:license', function () {
     return gulp.src('LICENSE.txt')
-               .pipe(gulp.dest(dirs.dist));
+        .pipe(gulp.dest(dirs.dist));
 });
 
 gulp.task('copy:img', function () {
