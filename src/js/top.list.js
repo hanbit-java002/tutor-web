@@ -50,12 +50,56 @@ require([
     }
 
     function initTopList() {
+        function configureMap(topList) {
+            var center = {
+                lat: 0,
+                lng: 0
+            };
+
+            // Create a map object and specify the DOM element for display.
+            var map = new google.maps.Map(document.getElementById("map"), {
+                center: center,
+                scrollwheel: false,
+                zoom: 12
+            });
+
+            for (var i=0;i<topList.stores.length;i++) {
+                var store = topList.stores[i];
+
+                // Create a marker and set its position.
+                var marker = new google.maps.Marker({
+                    map: map,
+                    position: store.latLng,
+                    title: store.name
+                });
+
+                center.lat += store.latLng.lat;
+                center.lng += store.latLng.lng;
+
+                console.log(marker);
+            }
+
+            center.lat /= topList.stores.length;
+            center.lng /= topList.stores.length;
+
+            map.panTo(center);
+        }
+
+        function initMap(topList) {
+            require(["async!https://maps.googleapis.com/maps/api/js?key=" +
+                "AIzaSyAHX_Y_cP2i1v9lchEPJ4yROwzh9nK6of0"], function() {
+                configureMap(topList);
+            });
+        }
+
         $.ajax({
             url: "/api/toplists/chirstmas",
             success: function(topList) {
                 $("#title-info").html(topList.clicks.toLocaleString() + " 클릭 | " + topList.date);
                 $("#title-text").html(topList.title);
                 $("#title-desc").html(topList.desc);
+
+                initMap(topList);
             }
         });
 
@@ -64,31 +108,6 @@ require([
         clipboard.on("success", function() {
             alert("페이지의 주소가 복사되었습니다.");
         });
-
-        function initMap() {
-            var myLatLng = {
-                lat: 37.5526233,
-                lng: 126.9375131
-            };
-
-            // Create a map object and specify the DOM element for display.
-            var map = new google.maps.Map(document.getElementById("map"), {
-                center: myLatLng,
-                scrollwheel: false,
-                zoom: 17
-            });
-
-            // Create a marker and set its position.
-            var marker = new google.maps.Marker({
-                map: map,
-                position: myLatLng,
-                title: "거구장"
-            });
-
-            console.log(marker);
-        }
-
-        require(["async!https://maps.googleapis.com/maps/api/js?key=AIzaSyAHX_Y_cP2i1v9lchEPJ4yROwzh9nK6of0"], initMap);
     }
 
     function initRelatedArea() {
