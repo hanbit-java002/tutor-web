@@ -51,7 +51,7 @@ require([
         $.ajax({
             url: "/api/toplists/chirstmas",
             success: function(topList) {
-                $("#title-info").html(topList.clicks + " 클릭 | " + topList.date);
+                $("#title-info").html(topList.clicks.toLocaleString() + " 클릭 | " + topList.date);
                 $("#title-text").html(topList.title);
                 $("#title-desc").html(topList.desc);
             }

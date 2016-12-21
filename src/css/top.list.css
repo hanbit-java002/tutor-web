@@ -31,6 +31,79 @@
     font-size: 20px;
 }
 
+.list-area>.inner>div {
+    border-bottom: solid 1px #ccc;
+}
+
+.list-area>.inner>div:last-child {
+    border-bottom: 0;
+}
+
+.list-share {
+    position: relative;
+    padding: 25px 0px;
+}
+
+.list-address {
+    position: relative;
+    width: 380px;
+    height: 50px;
+    border: solid 2px #ccc;
+    border-radius: 25px;
+    line-height: 50px;
+    padding-left: 25px;
+    padding-right: 135px;
+    color: #aaa;
+    font-size: 16px;
+}
+
+.share-address {
+    display: inline-block;
+    width: 100%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.share-button {
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    width: 130px;
+    height: 50px;
+    border: solid 2px #ff792a;
+    border-radius: 25px;
+    line-height: 50px;
+    color: #ff792a;
+    text-align: center;
+}
+
+.list-share-buttons {
+    position: absolute;
+    top: 25px;
+    right: 0px;
+}
+
+.list-share-buttons>li {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    border-radius: 25px;
+    text-align: center;
+    line-height: 50px;
+    font-size: 25px;
+}
+
+.facebook {
+    background-color: #3b5998;
+    color: #fff;
+}
+
+.twitter {
+    background-color: #17bf63;
+    color: #fff;
+}
+
 .related-area {
     background-color: #f7f7f7;
     border-top: 1px solid #dbdbdb;
