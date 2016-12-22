@@ -85,11 +85,6 @@ require([
         }
 
         function configureMap(topList) {
-            var center = {
-                lat: 0,
-                lng: 0
-            };
-
             var minLat = 5000, maxLat = -5000, minLng = 5000, maxLng = -5000;
 
             // Create a map object and specify the DOM element for display.
@@ -109,9 +104,6 @@ require([
                     title: store.name
                 });
 
-                center.lat += store.latLng.lat;
-                center.lng += store.latLng.lng;
-
                 minLat = Math.min(minLat, store.latLng.lat);
                 maxLat = Math.max(maxLat, store.latLng.lat);
                 minLng = Math.min(minLng, store.latLng.lng);
@@ -120,8 +112,10 @@ require([
                 console.log(marker);
             }
 
-            center.lat /= topList.stores.length;
-            center.lng /= topList.stores.length;
+            var center = {
+                lat: (maxLat - minLat) / 2,
+                lng: (maxLng - minLng) / 2
+            };
 
             var zoom = common.getBestZoom(minLat, maxLat, minLng, maxLng,
                 $("#map").width(), $("#map").height(), 18);
