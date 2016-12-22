@@ -20,8 +20,7 @@ define([
         });
     }
 
-    function getBestZoom(minLat, maxLat, minLng, maxLng,
-                         centerLat, centerLng, mapWidth, mapHeight) {
+    function getBestZoom(minLat, maxLat, minLng, maxLng, mapWidth, mapHeight) {
         var radius = 6371; // radius of the earth in km
         var oneRadian = 57.2958; // one radian
         var interval = 0;

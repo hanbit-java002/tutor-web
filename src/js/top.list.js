@@ -124,7 +124,7 @@ require([
             center.lng /= topList.stores.length;
 
             var zoom = common.getBestZoom(minLat, maxLat, minLng, maxLng,
-                center.lat, center.lng, $("#map").width(), $("#map").height());
+                $("#map").width(), $("#map").height());
 
             map.panTo(center);
             map.setZoom(zoom);
