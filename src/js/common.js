@@ -45,11 +45,11 @@ define([
             Math.log(1.6446 * dist / Math.sqrt(2 * (mapWidth * mapHeight))) /
             Math.log (2));
 
-        if (maxZoom) {
-            return Math.min(zoom, maxZoom);
+        if (!maxZoom) {
+            maxZoom = 21;
         }
 
-        return zoom;
+        return Math.min(zoom, maxZoom);
     }
 
     return {
