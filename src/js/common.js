@@ -27,13 +27,14 @@ define([
 
         if ((maxLat - minLat) > (maxLng - minLng)) {
             interval = (maxLat - minLat) / 2;
-            minLat -= interval;
-            maxLat += interval;
         } else {
             interval = (maxLng - minLng) / 2;
-            minLng -= interval;
-            maxLng += interval;
         }
+
+        minLat -= interval;
+        maxLat += interval;
+        minLng -= interval;
+        maxLng += interval;
 
         var dist = (radius * Math.acos(Math.sin(minLat / oneRadian) *
             Math.sin(maxLat / oneRadian) + (Math.cos(minLat / oneRadian) *
