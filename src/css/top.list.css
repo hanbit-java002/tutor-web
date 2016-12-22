@@ -31,6 +31,88 @@
     font-size: 20px;
 }
 
+.list-container>ul>li {
+    position: relative;
+    padding: 25px 0px;
+    border-bottom: solid 1px #ccc;
+}
+
+.list-container>ul>li:last-child {
+    border-bottom: 0;
+}
+
+.store-img {
+    position: absolute;
+    width: 238px;
+    height: 238px;
+    background-size: cover;
+}
+
+.store-contents {
+    position: relative;
+    padding-left: 265px;
+    height: 238px;
+}
+
+.store-title {
+    font-size: 30px;
+    color: #555;
+}
+
+.store-score {
+    color: #ff792a;
+}
+
+.store-addr {
+    font-size: 16px;
+    color: #999;
+}
+
+.store-review {
+    position: relative;
+    padding-top: 15px;
+}
+
+.store-review-editor-pic {
+    position: absolute;
+    width: 35px;
+    height: 35px;
+    background-size: cover;
+    border-radius: 17.5px;
+}
+
+.store-review-contents {
+    padding-left: 50px;
+    font-size: 16px;
+}
+
+.store-reivew-editor-name {
+    font-weight: bold;
+}
+
+.store-link {
+    position: absolute;
+    right: 0px;
+    bottom: 0px;
+    font-size: 16px;
+    color: #999;
+}
+
+.store-star {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    color: #999;
+}
+
+.store-star>i {
+    font-size: 40px;
+}
+
+.store-star-text {
+    font-size: 10px;
+}
+
 .list-area>.inner>div {
     border-bottom: solid 1px #ccc;
 }

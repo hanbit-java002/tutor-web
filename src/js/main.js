@@ -105,8 +105,8 @@ require([
                 sectionHTML += "<div class=\"section-name\">";
                 sectionHTML += item.name;
                 sectionHTML += "</div>";
-                sectionHTML += "<div class=\"section-score\">";
-                sectionHTML += item.score;
+                sectionHTML += " <div class=\"section-score\">";
+                sectionHTML += item.score.toFixed(1);
                 sectionHTML += "</div>";
                 sectionHTML += "<div class=\"section-info\">";
                 sectionHTML += item.location + " - " + item.category;

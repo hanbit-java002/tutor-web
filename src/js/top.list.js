@@ -25,7 +25,7 @@ require([
                 sectionHTML += item.name;
                 sectionHTML += "</div>";
                 sectionHTML += "<div class=\"section-score\">";
-                sectionHTML += item.score;
+                sectionHTML += item.score.toFixed(1);
                 sectionHTML += "</div>";
                 sectionHTML += "<div class=\"section-info\">";
                 sectionHTML += item.location + " - " + item.category;
@@ -50,6 +50,40 @@ require([
     }
 
     function initTopList() {
+        function initStoreList(topList) {
+            for (var i=0;i<topList.stores.length;i++) {
+                var store = topList.stores[i];
+                var review = store.review;
+
+                var listHTML = "<li>";
+                listHTML += "<div class=\"store-img\" style=\"background-image: url('" + store.img + "')\"></div>";
+                listHTML += "<div class=\"store-contents\">";
+                listHTML += "<div class=\"store-title\">";
+                listHTML += "<span class=\"store-name\">" + (i+1) + ". " + store.name + "</span>";
+                listHTML += " <span class=\"store-score\">" + store.score.toFixed(1) + "</span>";
+                listHTML += "</div>";
+                listHTML += "<div class=\"store-addr\">" + store.address + "</div>";
+                listHTML += "<div class=\"store-review\">";
+                listHTML += "<div class=\"store-review-editor-pic\" style=\"background-image: url('" + review.editorPic + "')\"></div>";
+                listHTML += "<div class=\"store-review-contents\">";
+                listHTML += "<span class=\"store-reivew-editor-name\">" + review.editorName + "</span>";
+                listHTML += " " + review.content;
+                listHTML += "</div>";
+                listHTML += "</div>";
+                listHTML += "<div class=\"store-link\">" + store.name + " 더보기 &gt;</div>";
+                listHTML += "<div class=\"store-star\">";
+                listHTML += "<i class=\"fa fa-star-o\"></i>";
+                listHTML += "<div class=\"store-star-text\">";
+                listHTML += "가고싶다";
+                listHTML += "</div>";
+                listHTML += "</div>";
+                listHTML += "</div>";
+                listHTML += "</li>";
+
+                $(".list-container>ul").append(listHTML);
+            }
+        }
+
         function configureMap(topList) {
             var center = {
                 lat: 0,
@@ -60,7 +94,7 @@ require([
             var map = new google.maps.Map(document.getElementById("map"), {
                 center: center,
                 scrollwheel: false,
-                zoom: 12
+                zoom: 15
             });
 
             for (var i=0;i<topList.stores.length;i++) {
@@ -99,6 +133,7 @@ require([
                 $("#title-text").html(topList.title);
                 $("#title-desc").html(topList.desc);
 
+                initStoreList(topList);
                 initMap(topList);
             }
         });
