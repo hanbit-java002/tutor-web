@@ -8,7 +8,8 @@ require.config({
         "bootstrap"     : "vendor/bootstrap/js/bootstrap.min",
         "clipboard"     : "vendor/clipboard/clipboard.min",
 
-        "common"        : "common"
+        "common"        : "common",
+        "animation"     : "animation"
     },
 
     shim: {

@@ -1,8 +1,26 @@
 define([
-    "bootstrap"
+    "bootstrap",
+    "animation"
 ], function () {
+    function search() {
+        location.href = "search.html";
+    }
+
     $("#main-logo").on("click", function() {
         location.href = "/";
+    });
+
+    $("#main-search").on("keyup", function(event) {
+        if (event.keyCode === 13) {
+            search();
+        }
+        else if (event.keyCode === 27) {
+            $(this).val("");
+        }
+    });
+
+    $("#main-search-btn").on("click", function() {
+        search();
     });
 
     function addHotPlaces(hotPlaces) {
