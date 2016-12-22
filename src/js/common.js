@@ -20,7 +20,7 @@ define([
         });
     }
 
-    function getBestZoom(minLat, maxLat, minLng, maxLng, mapWidth, mapHeight) {
+    function getBestZoom(minLat, maxLat, minLng, maxLng, mapWidth, mapHeight, maxZoom) {
         var radius = 6371; // radius of the earth in km
         var oneRadian = 57.2958; // one radian
         var interval = 0;
@@ -40,9 +40,15 @@ define([
             Math.cos(maxLat / oneRadian) *
             Math.cos((maxLng / oneRadian) - (minLng / oneRadian)))));
 
-        return Math.floor(8 -
+        var zoom = Math.floor(8 -
             Math.log(1.6446 * dist / Math.sqrt(2 * (mapWidth * mapHeight))) /
             Math.log (2));
+
+        if (maxZoom) {
+            return Math.min(zoom, maxZoom);
+        }
+
+        return zoom;
     }
 
     return {
