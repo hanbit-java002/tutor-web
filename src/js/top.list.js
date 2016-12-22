@@ -90,6 +90,8 @@ require([
                 lng: 0
             };
 
+            var minLat = 5000, maxLat = -5000, minLng = 5000, maxLng = -5000;
+
             // Create a map object and specify the DOM element for display.
             var map = new google.maps.Map(document.getElementById("map"), {
                 center: center,
@@ -110,13 +112,22 @@ require([
                 center.lat += store.latLng.lat;
                 center.lng += store.latLng.lng;
 
+                minLat = Math.min(minLat, store.latLng.lat);
+                maxLat = Math.max(maxLat, store.latLng.lat);
+                minLng = Math.min(minLng, store.latLng.lng);
+                maxLng = Math.max(maxLng, store.latLng.lng);
+
                 console.log(marker);
             }
 
             center.lat /= topList.stores.length;
             center.lng /= topList.stores.length;
 
+            var zoom = common.getBestZoom(minLat, maxLat, minLng, maxLng,
+                center.lat, center.lng, $("#map").width(), $("#map").height());
+
             map.panTo(center);
+            map.setZoom(zoom);
         }
 
         function initMap(topList) {
