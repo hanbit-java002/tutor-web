@@ -27,7 +27,7 @@ define([
 
     var Const = {
         INTERVAL: 100,
-        MOVE: 3, MIN_MOVE: 3, MAX_MOVE: 21
+        MOVE: 12, MIN_MOVE: 3, MAX_MOVE: 21
     };
 
     var inputKeyCode = Key.RIGHT;
@@ -41,6 +41,12 @@ define([
     };
 
     function initSanta() {
+        $("#santa").remove();
+
+        escCount = 0;
+        Frame.current = 0;
+        Frame.action = Action.RUN;
+
         $("body").append("<div id='santa' style='width:72px;height:72px;" +
             "background-image: url(img/santa.png);z-index: 100;position: fixed;" +
             "top:0px;left:0px;'></div>");
