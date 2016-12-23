@@ -4,6 +4,8 @@ define([
     var running = false;
     var escCount = 0;
 
+    var isLive = true;
+
     var Key = {
         ESC: 27,
         A: 65, W: 87, D: 68, S: 83,
@@ -19,7 +21,8 @@ define([
 
     var Action = {
         RUN: 0,
-        JUMP: 1
+        JUMP: 1,
+        DIE: 2
     };
 
     var Const = {
@@ -37,31 +40,33 @@ define([
         action: Action.RUN
     };
 
-    function initBlock() {
-        $("body").append("<div id='block' style='width:72px;height:72px;" +
+    function initSanta() {
+        $("body").append("<div id='santa' style='width:72px;height:72px;" +
             "background-image: url(img/santa.png);z-index: 100;position: fixed;" +
             "top:0px;left:0px;'></div>");
     }
 
-    function moveBlock() {
+    function moveSanta() {
         var moveLeft = 0;
         var moveTop = 0;
 
-        if (inputKeyCode === Key.LEFT) {
-            moveLeft = -Const.MOVE;
-        }
-        else if (inputKeyCode === Key.UP) {
-            moveTop = -Const.MOVE;
-        }
-        else if (inputKeyCode === Key.RIGHT) {
-            moveLeft = Const.MOVE;
-        }
-        else if (inputKeyCode === Key.DOWN) {
-            moveTop = Const.MOVE;
+        if (Frame.action !== Action.DIE) {
+            if (inputKeyCode === Key.LEFT) {
+                moveLeft = -Const.MOVE;
+            }
+            else if (inputKeyCode === Key.UP) {
+                moveTop = -Const.MOVE;
+            }
+            else if (inputKeyCode === Key.RIGHT) {
+                moveLeft = Const.MOVE;
+            }
+            else if (inputKeyCode === Key.DOWN) {
+                moveTop = Const.MOVE;
+            }
         }
 
-        var newLeft = $("#block").position().left + moveLeft;
-        var newTop = $("#block").position().top + moveTop;
+        var newLeft = $("#santa").position().left + moveLeft;
+        var newTop = $("#santa").position().top + moveTop;
 
         if (inputKeyCode === Key.LEFT && newLeft < 0) {
             inputKeyCode = Key.RIGHT;
@@ -78,11 +83,11 @@ define([
             inputKeyCode = Key.UP;
         }
 
-        $("#block").css("background-position",
+        $("#santa").css("background-position",
             "-" + (Frame.current * 72) + "px -" + (Frame.action * 72) + "px");
-        $("#block").css("transform", "scaleX(" + Frame.direction + ")");
+        $("#santa").css("transform", "scaleX(" + Frame.direction + ")");
 
-        $("#block").css("left", newLeft + "px");
+        $("#santa").css("left", newLeft + "px");
 
         if (Frame.action === Action.JUMP) {
             if (Frame.current === 1) {
@@ -93,26 +98,81 @@ define([
             }
         }
 
-        $("#block").css("top", newTop + "px");
+        $("#santa").css("top", newTop + "px");
 
         Frame.current++;
 
         if (Frame.current >= Frame.frames) {
+            if (Frame.action === Action.DIE) {
+                running = false;
+                return;
+            }
+
             Frame.current = 0;
             Frame.action = nextAction;
             nextAction = Action.RUN;
         }
 
-        setTimeout(moveBlock, Const.INTERVAL);
+        setTimeout(moveSanta, Const.INTERVAL);
     }
 
     function updateKeyCode(event) {
         inputKeyCode = event.keyCode;
     }
 
+    function end() {
+        isLive = false;
+        nextAction = Action.DIE;
+    }
+
+    function addEvents() {
+        $("#santa").on("click", function() {
+            end();
+        });
+
+        $(document).on("keydown", function(event) {
+            event.preventDefault();
+
+            switch (event.keyCode) {
+                case Key.LEFT:
+                case Key.A:
+                    Frame.direction = Direction.LEFT;
+                    event.keyCode = Key.LEFT;
+                    updateKeyCode(event);
+                    break;
+                case Key.UP:
+                case Key.W:
+                    event.keyCode = Key.UP;
+                    updateKeyCode(event);
+                    break;
+                case Key.RIGHT:
+                case Key.D:
+                    event.keyCode = Key.RIGHT;
+                    Frame.direction = Direction.RIGHT;
+                    updateKeyCode(event);
+                    break;
+                case Key.DOWN:
+                case Key.S:
+                    event.keyCode = Key.DOWN;
+                    updateKeyCode(event);
+                    break;
+                case Key.PLUS:
+                    Const.MOVE = Math.min(Const.MOVE + 3, Const.MAX_MOVE);
+                    break;
+                case Key.MINUS:
+                    Const.MOVE = Math.max(Const.MOVE - 3, Const.MIN_MOVE);
+                    break;
+                case Key.SPACE:
+                    nextAction = Action.JUMP;
+                    break;
+            }
+        });
+    }
+
     function start() {
-        initBlock();
-        moveBlock();
+        initSanta();
+        addEvents();
+        moveSanta();
 
         running = true;
     }
@@ -128,42 +188,6 @@ define([
 
         if (escCount >= 5) {
             start();
-        }
-
-        event.preventDefault();
-
-        switch (event.keyCode) {
-            case Key.LEFT:
-            case Key.A:
-                Frame.direction = Direction.LEFT;
-                event.keyCode = Key.LEFT;
-                updateKeyCode(event);
-                break;
-            case Key.UP:
-            case Key.W:
-                event.keyCode = Key.UP;
-                updateKeyCode(event);
-                break;
-            case Key.RIGHT:
-            case Key.D:
-                event.keyCode = Key.RIGHT;
-                Frame.direction = Direction.RIGHT;
-                updateKeyCode(event);
-                break;
-            case Key.DOWN:
-            case Key.S:
-                event.keyCode = Key.DOWN;
-                updateKeyCode(event);
-                break;
-            case Key.PLUS:
-                Const.MOVE = Math.min(Const.MOVE + 3, Const.MAX_MOVE);
-                break;
-            case Key.MINUS:
-                Const.MOVE = Math.max(Const.MOVE - 3, Const.MIN_MOVE);
-                break;
-            case Key.SPACE:
-                nextAction = Action.JUMP;
-                break;
         }
     });
 });
