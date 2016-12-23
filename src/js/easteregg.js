@@ -4,7 +4,8 @@ define([
     var Key = {
         A: 65, W: 87, D: 68, S: 83,
         LEFT: 37, UP: 38, RIGHT: 39, DOWN: 40,
-        PLUS: 107, MINUS: 109
+        PLUS: 107, MINUS: 109,
+        SPACE: 32
     };
 
     var Direction = {
@@ -12,17 +13,24 @@ define([
         RIGHT: 1
     };
 
+    var Action = {
+        RUN: 0,
+        JUMP: 1
+    };
+
     var Const = {
-        INTERVAL: 50,
+        INTERVAL: 100,
         MOVE: 3, MIN_MOVE: 3, MAX_MOVE: 21
     };
 
     var inputKeyCode = Key.RIGHT;
+    var nextAction = Action.RUN;
 
     var Frame = {
         current: 0,
         frames: 4,
-        direction: Direction.RIGHT
+        direction: Direction.RIGHT,
+        action: Action.RUN
     };
 
     function initBlock() {
@@ -66,16 +74,29 @@ define([
             inputKeyCode = Key.UP;
         }
 
-        $("#block").css("background-position", "-" + (Frame.current * 72) + "px 0");
+        $("#block").css("background-position",
+            "-" + (Frame.current * 72) + "px -" + (Frame.action * 72) + "px");
         $("#block").css("transform", "scaleX(" + Frame.direction + ")");
 
         $("#block").css("left", newLeft + "px");
+
+        if (Frame.action === Action.JUMP) {
+            if (Frame.current === 1) {
+                newTop -= 36;
+            }
+            else if (Frame.current === 3) {
+                newTop += 36;
+            }
+        }
+
         $("#block").css("top", newTop + "px");
 
         Frame.current++;
 
         if (Frame.current >= Frame.frames) {
             Frame.current = 0;
+            Frame.action = nextAction;
+            nextAction = Action.RUN;
         }
 
         setTimeout(moveBlock, Const.INTERVAL);
@@ -115,6 +136,10 @@ define([
                 break;
             case Key.MINUS:
                 Const.MOVE = Math.max(Const.MOVE - 3, Const.MIN_MOVE);
+                break;
+            case Key.SPACE:
+                nextAction = Action.JUMP;
+                event.preventDefault();
                 break;
         }
     });
