@@ -27,7 +27,7 @@ define([
 
     var Const = {
         INTERVAL: 100,
-        MOVE: 12, MIN_MOVE: 3, MAX_MOVE: 21
+        MOVE: 12, MIN_MOVE: 3, MAX_MOVE: 45
     };
 
     var inputKeyCode = Key.RIGHT;
@@ -46,6 +46,7 @@ define([
         escCount = 0;
         Frame.current = 0;
         Frame.action = Action.RUN;
+        nextAction = Action.RUN;
 
         $("body").append("<div id='santa' style='width:72px;height:72px;" +
             "background-image: url(img/santa.png);z-index: 100;position: fixed;" +
@@ -131,9 +132,21 @@ define([
         nextAction = Action.DIE;
     }
 
+    function speedUp() {
+        Const.MOVE = Math.min(Const.MOVE + 3, Const.MAX_MOVE);
+    }
+
+    function speedDown() {
+        Const.MOVE = Math.max(Const.MOVE - 3, Const.MIN_MOVE);
+    }
+
     function addEvents() {
         $("#santa").on("click", function() {
             end();
+        });
+
+        $("#santa").on("mouseover", function() {
+           speedUp();
         });
 
         $(document).on("keydown", function(event) {
@@ -163,10 +176,10 @@ define([
                     updateKeyCode(event);
                     break;
                 case Key.PLUS:
-                    Const.MOVE = Math.min(Const.MOVE + 3, Const.MAX_MOVE);
+                    speedUp();
                     break;
                 case Key.MINUS:
-                    Const.MOVE = Math.max(Const.MOVE - 3, Const.MIN_MOVE);
+                    speedDown();
                     break;
                 case Key.SPACE:
                     nextAction = Action.JUMP;
