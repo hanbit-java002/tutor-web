@@ -32,6 +32,7 @@ define([
 
     var inputKeyCode = Key.RIGHT;
     var nextAction = Action.RUN;
+    var timer;
 
     var Frame = {
         current: 0,
@@ -108,21 +109,31 @@ define([
 
         $("#santa").css("top", newTop + "px");
 
-        Frame.current++;
+        if (!isLive && Frame.action === Action.DIE) {
+            clearTimeout(timer);
 
-        if (Frame.current >= Frame.frames) {
-            if (Frame.action === Action.DIE) {
-                isLive = false;
-                running = false;
-                return;
+            Frame.action = Action.RUN;
+
+            timer = setTimeout(moveSanta, 1500);
+        }
+        else {
+            Frame.current++;
+
+            if (Frame.current >= Frame.frames) {
+                if (Frame.action === Action.DIE) {
+                    isLive = false;
+                    running = false;
+                    clearTimeout(timer);
+                    return;
+                }
+
+                Frame.current = 0;
+                Frame.action = nextAction;
+                nextAction = Action.RUN;
             }
 
-            Frame.current = 0;
-            Frame.action = nextAction;
-            nextAction = Action.RUN;
+            timer = setTimeout(moveSanta, Const.INTERVAL);
         }
-
-        setTimeout(moveSanta, Const.INTERVAL);
     }
 
     function updateKeyCode(event) {
