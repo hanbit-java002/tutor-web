@@ -9,7 +9,7 @@ require.config({
         "clipboard"     : "vendor/clipboard/clipboard.min",
 
         "common"        : "common",
-        "animation"     : "animation"
+        "easteregg"     : "easteregg"
     },
 
     shim: {

@@ -1,6 +1,6 @@
 define([
     "bootstrap",
-    "animation"
+    "easteregg"
 ], function () {
     function search() {
         location.href = "search.html";
