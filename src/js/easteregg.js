@@ -1,7 +1,11 @@
 define([
     "jquery"
 ], function () {
+    var running = false;
+    var escCount = 0;
+
     var Key = {
+        ESC: 27,
         A: 65, W: 87, D: 68, S: 83,
         LEFT: 37, UP: 38, RIGHT: 39, DOWN: 40,
         PLUS: 107, MINUS: 109,
@@ -103,11 +107,31 @@ define([
     }
 
     function updateKeyCode(event) {
-        event.preventDefault();
         inputKeyCode = event.keyCode;
     }
 
+    function start() {
+        initBlock();
+        moveBlock();
+
+        running = true;
+    }
+
     $(document).on("keydown", function(event) {
+        if (!running && event.keyCode === Key.ESC) {
+            escCount++;
+        }
+        else {
+            escCount = 0;
+            return;
+        }
+
+        if (escCount >= 5) {
+            start();
+        }
+
+        event.preventDefault();
+
         switch (event.keyCode) {
             case Key.LEFT:
             case Key.A:
@@ -139,11 +163,7 @@ define([
                 break;
             case Key.SPACE:
                 nextAction = Action.JUMP;
-                event.preventDefault();
                 break;
         }
     });
-
-    initBlock();
-    moveBlock();
 });
