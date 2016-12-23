@@ -91,7 +91,8 @@ define([
         }
 
         $("#santa").css("background-position",
-            "-" + (Frame.current * 72) + "px -" + (Frame.action * 72) + "px");
+            "-" + (Frame.current * 72) + "px " +
+            "-" + (Frame.action * 72 + (!isLive ? 216 : 0)) + "px");
         $("#santa").css("transform", "scaleX(" + Frame.direction + ")");
 
         $("#santa").css("left", newLeft + "px");
@@ -111,6 +112,7 @@ define([
 
         if (Frame.current >= Frame.frames) {
             if (Frame.action === Action.DIE) {
+                isLive = false;
                 running = false;
                 return;
             }
@@ -128,7 +130,6 @@ define([
     }
 
     function end() {
-        isLive = false;
         nextAction = Action.DIE;
     }
 
