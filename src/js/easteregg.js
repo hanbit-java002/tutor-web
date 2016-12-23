@@ -1,61 +1,78 @@
 define([
     "jquery"
 ], function () {
-    var inputKeyCode = 39;
+    var Key = {
+        LEFT: 37, UP: 38, RIGHT: 39, DOWN: 40,
+        PLUS: 107, MINUS: 109
+    };
+
+    var Const = {
+        INTERVAL: 30,
+        MOVE: 3, MIN_MOVE: 3, MAX_MOVE: 21
+    };
+
+    var inputKeyCode = Key.RIGHT;
 
     function initBlock() {
         $("body").append("<div id='block' style='width:30px;height:30px;" +
-            "background-color: red;z-index: 100;position: absolute;" +
-            "top:30px;left:0px;'></div>");
+            "background-color: red;z-index: 100;position: fixed;" +
+            "top:0px;left:0px;'></div>");
     }
 
     function moveBlock() {
         var moveLeft = 0;
         var moveTop = 0;
 
-        if (inputKeyCode === 37) {
-            moveLeft = -10;
+        if (inputKeyCode === Key.LEFT) {
+            moveLeft = -Const.MOVE;
         }
-        else if (inputKeyCode === 38) {
-            moveTop = -10;
+        else if (inputKeyCode === Key.UP) {
+            moveTop = -Const.MOVE;
         }
-        else if (inputKeyCode === 39) {
-            moveLeft = 10;
+        else if (inputKeyCode === Key.RIGHT) {
+            moveLeft = Const.MOVE;
         }
-        else if (inputKeyCode === 40) {
-            moveTop = 10;
+        else if (inputKeyCode === Key.DOWN) {
+            moveTop = Const.MOVE;
         }
 
         var newLeft = $("#block").position().left + moveLeft;
         var newTop = $("#block").position().top + moveTop;
 
-        if (inputKeyCode === 37 && newLeft < 0) {
-            inputKeyCode = 39;
+        if (inputKeyCode === Key.LEFT && newLeft < 0) {
+            inputKeyCode = Key.RIGHT;
         }
-        else if (inputKeyCode === 39 && newLeft > $(window).width()) {
-            inputKeyCode = 37;
+        else if (inputKeyCode === Key.RIGHT && newLeft > $(window).width()) {
+            inputKeyCode = Key.LEFT;
         }
-        else if (inputKeyCode === 38 && newTop < 0) {
-            inputKeyCode = 40;
+        else if (inputKeyCode === Key.UP && newTop < 0) {
+            inputKeyCode = Key.DOWN;
         }
-        else if (inputKeyCode === 40 && newTop > $(window).height()) {
-            inputKeyCode = 38;
+        else if (inputKeyCode === Key.DOWN && newTop > $(window).height()) {
+            inputKeyCode = Key.UP;
         }
 
         $("#block").css("left", newLeft + "px");
         $("#block").css("top", newTop + "px");
 
-        setTimeout(moveBlock, 100);
+        setTimeout(moveBlock, Const.INTERVAL);
     }
 
     $(document).on("keydown", function(event) {
         switch (event.keyCode) {
-            case 37:
-            case 38:
-            case 39:
-            case 40:
+            case Key.LEFT:
+            case Key.UP:
+            case Key.RIGHT:
+            case Key.DOWN:
                 event.preventDefault();
                 inputKeyCode = event.keyCode;
+                break;
+            case Key.PLUS:
+                Const.MOVE = Math.min(Const.MOVE + 3, Const.MAX_MOVE);
+                break;
+            case Key.MINUS:
+                Const.MOVE = Math.max(Const.MOVE - 3, Const.MIN_MOVE);
+                break;
         }
     });
 
