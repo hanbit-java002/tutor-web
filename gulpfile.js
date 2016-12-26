@@ -157,7 +157,7 @@ gulp.task('copy:css', function () {
            cascade: false
         }))
         .pipe(less({
-            compress: true
+            compress: false
         }))
         .pipe(plugins.rename(function(path) {
             path.extname = '.css';

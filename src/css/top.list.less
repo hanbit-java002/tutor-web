@@ -1,4 +1,6 @@
-@import 'lib/colors.less';
+@import 'lib/include.all.less';
+
+@import 'common.css';
 
 .hp-contents {
     padding-top: 67px;
@@ -7,8 +9,7 @@
 
 .inner {
     width: 920px;
-    margin-left: auto;
-    margin-right: auto;
+    @marginAutoWidth();
     padding: 0px 30px;
 }
 
@@ -62,7 +63,7 @@
 }
 
 .store-score {
-    color: #ff792a;
+    color: @mainColor;
 }
 
 .store-addr {
@@ -149,16 +150,18 @@
     overflow: hidden;
 }
 
+@shareButtonHeight: 50px;
+
 .share-button {
     position: absolute;
     top: -2px;
     right: -2px;
     width: 130px;
-    height: 50px;
-    border: solid 2px #ff792a;
-    border-radius: 25px;
-    line-height: 50px;
-    color: #ff792a;
+    height: @shareButtonHeight;
+    border: solid 2px @mainColor;
+    border-radius: @shareButtonHeight/2;
+    line-height: @shareButtonHeight;
+    color: @mainColor;
     text-align: center;
     cursor: pointer;
 }
@@ -180,7 +183,7 @@
 }
 
 .facebook {
-    background-color: #3b5998;
+    background-color: @facebook;
     color: #fff;
 }
 
@@ -190,7 +193,7 @@
 
 .list-area .section-title {
     font-size: 23px;
-    color: #ff792a;
+    color: @mainColor;
     padding-bottom: 25px;
 }
 
@@ -200,7 +203,7 @@
 }
 
 .twitter {
-    background-color: #17bf63;
+    background-color: @twitter;
     color: #fff;
 }
 
@@ -222,7 +225,7 @@
 
 .related-area .section-title {
     font-size: 23px;
-    color: #ff792a;
+    color: @mainColor;
 }
 
 .section-contents>ul>li {
@@ -276,7 +279,7 @@
     position: absolute;
     top: 175px;
     right: 15px;
-    color: #ff792a;
+    color: @mainColor;
     font-size: 20px;
     font-weight: bold;
     vertical-align: top;
