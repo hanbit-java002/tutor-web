@@ -2,6 +2,22 @@ define([
     "bootstrap",
     "easteregg"
 ], function () {
+    function resizeHeaderSearch() {
+        var mainLogoWidth = $("#main-logo").outerWidth();
+        var mainMenuWidth = $("#main-menu").outerWidth();
+
+        $("#header-search").css("padding-left", mainLogoWidth + "px");
+        $("#header-search").css("padding-right", mainMenuWidth + "px");
+    }
+
+    if ($("#header-search").length > 0) {
+        $(window).on("resize", function() {
+            resizeHeaderSearch();
+        });
+
+        resizeHeaderSearch();
+    }
+
     function search() {
         location.href = "search.html";
     }
@@ -10,7 +26,7 @@ define([
         location.href = "/";
     });
 
-    $("#main-search").on("keyup", function(event) {
+    $("#main-search, #top-search").on("keyup", function(event) {
         if (event.keyCode === 13) {
             search();
         }
