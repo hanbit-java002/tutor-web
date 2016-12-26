@@ -22,6 +22,10 @@ define([
         location.href = "search.html";
     }
 
+    function clearSearchKeywords() {
+        $("#main-search, #top-search").val("");
+    }
+
     $("#main-logo").on("click", function() {
         location.href = "/";
     });
@@ -31,12 +35,16 @@ define([
             search();
         }
         else if (event.keyCode === 27) {
-            $(this).val("");
+            clearSearchKeywords();
         }
     });
 
     $("#main-search-btn").on("click", function() {
         search();
+    });
+
+    $(".search-clear").on("click", function() {
+        clearSearchKeywords();
     });
 
     function addHotPlaces(hotPlaces) {
