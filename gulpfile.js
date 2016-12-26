@@ -18,6 +18,9 @@ var dirs = pkg['h5bp-configs'].directories;
 var uglify = require('gulp-uglify');
 var pump = require('pump');
 
+var handlebars = require('gulp-compile-handlebars');
+var less = require('gulp-less');
+
 // ---------------------------------------------------------------------
 // | Helper tasks                                                      |
 // ---------------------------------------------------------------------
@@ -147,31 +150,34 @@ gulp.task('copy:img', function () {
 });
 
 gulp.task('copy:css', function () {
-
-    var banner = '/*! HTML5 Boilerplate v' + pkg.version +
-                    ' | ' + pkg.license.type + ' License' +
-                    ' | ' + pkg.homepage + ' */\n\n';
-
-    return gulp.src(dirs.src + '/css/**/*.css')
-               .pipe(plugins.header(banner))
-               .pipe(plugins.autoprefixer({
-                   browsers: ['last 2 versions', 'ie >= 8', '> 1%'],
-                   cascade: false
-               }))
-               .pipe(gulp.dest(dirs.dist + '/css'));
+    return gulp.src([dirs.src + '/css/**/*.less',
+        '!' + dirs.src + '/css/lib/**/*.less'])
+        .pipe(plugins.autoprefixer({
+           browsers: ['last 2 versions', 'ie >= 8', '> 1%'],
+           cascade: false
+        }))
+        .pipe(less({
+            compress: true
+        }))
+        .pipe(plugins.rename(function(path) {
+            path.extname = '.css';
+        }))
+        .pipe(gulp.dest(dirs.dist + '/css'));
 });
 
 gulp.task('copy:misc', function () {
     return gulp.src([
-
         // Copy all files
         dirs.src + '/**/*',
 
         // Exclude the following files
         // (other tasks will handle the copying of these files)
         '!' + dirs.src + '/img/**/*',
-        '!' + dirs.src + '/css/**/*.css',
-        '!' + dirs.src + '/js/**/*.js'
+        '!' + dirs.src + '/css/lib',
+        '!' + dirs.src + '/css/**/*.less',
+        '!' + dirs.src + '/js/**/*.js',
+        '!' + dirs.src + '/partials',
+        '!' + dirs.src + '/**/*.hbs'
     ], {
 
         // Include hidden files by default
@@ -184,6 +190,28 @@ gulp.task('copy:misc', function () {
 gulp.task('copy:normalize', function () {
     return gulp.src('node_modules/normalize.css/normalize.css')
                .pipe(gulp.dest(dirs.dist + '/css'));
+});
+
+gulp.task('handlebars', function() {
+    var globalData = {
+        lang: 'ko',
+        ceoName: '김한슬',
+        bizNo: '000-00-00000',
+        bizAddr: '서울특별시 마포구 백범로 23'
+    };
+
+    var options = {
+        batch: [dirs.src + '/partials']
+    };
+
+    return gulp.src([dirs.src + '/**/*.hbs',
+        '!' + dirs.src + '/partials/**/*.hbs',
+        '!' + dirs.src + '/template.hbs'])
+        .pipe(handlebars(globalData, options))
+        .pipe(plugins.rename(function(path) {
+            path.extname = '.html';
+        }))
+        .pipe(gulp.dest(dirs.dist));
 });
 
 gulp.task('lint:js', function () {
@@ -224,7 +252,8 @@ gulp.task('build', function (done) {
         ['clean', 'lint:js'],
         'compress',
         'copy',
-    done);
+        'handlebars',
+        done);
 });
 
 gulp.task('default', ['build']);

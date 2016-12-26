@@ -1,0 +1,76 @@
+{{> header title='탑리스트' cssName='top.list'}}
+    <div class="hp-contents">
+        <div class="title-area">
+            <div class="inner">
+                <div id="title-info"></div>
+                <div id="title-text"></div>
+                <div id="title-desc"></div>
+            </div>
+        </div>
+        <div class="list-area">
+            <div class="inner">
+                <div class="list-container">
+                    <ul>
+                    </ul>
+                </div>
+                <div class="list-share">
+                    <div class="list-share-address">
+                        <div class="list-address">
+                            <span id="share-address" class="share-address">
+                                http://localhost/top_list.html?id=christmas
+                            </span>
+                            <div class="share-button" data-clipboard-target="#share-address">
+                                <i class="fa fa-external-link"></i>
+                                공유하기
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="list-share-buttons">
+                        <li class="facebook">
+                            <i class="fa fa-facebook"></i>
+                        </li>
+                        <li class="twitter">
+                            <i class="fa fa-twitter"></i>
+                        </li>
+                    </ul>
+                </div>
+                <div class="list-map">
+                    <section>
+                        <div class="section-title">
+                            리스트 지도
+                        </div>
+                        <div class="section-body">
+                            <div id="map"></div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+        <div class="related-area">
+            <div class="inner">
+                <section>
+                    <div class="section-title">
+                        리스트의 식당과 비슷한 맛집
+                    </div>
+                    <div class="section-body">
+                        <div class="section-contents section01">
+                            <ul>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <div class="section-title">
+                        실시간 인기 키워드
+                    </div>
+                    <div class="section-body">
+                        <div class="section-contents section02">
+                            <ul>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+{{> footer jsName='top.list'}}
