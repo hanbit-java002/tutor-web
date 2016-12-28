@@ -11,7 +11,9 @@
 @search-info-width: 400px;
 
 .search-list {
-    padding-right: @search-info-width;
+    display: inline-block;
+    width: calc(~"100% -" @search-info-width);
+    vertical-align: top;
 }
 
 .search-list>.inner {
@@ -155,10 +157,19 @@ section.category>ul>li {
 }
 
 .search-info {
-    position: absolute;
-    top: 0px;
-    right: 0px;
+    display: inline-block;
     width: @search-info-width;
     min-height: 100%;
     background-color: #f6f6f6;
+}
+
+#map {
+    width: 100%;
+    height: 485px;
+}
+
+.section-title {
+    color: @main-color;
+    font-size: 22px;
+    line-height: 70px;
 }
