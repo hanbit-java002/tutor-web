@@ -17,6 +17,7 @@ var dirs = pkg['h5bp-configs'].directories;
 
 var uglify = require('gulp-uglify');
 var pump = require('pump');
+var htmlmin = require('gulp-html-minifier');
 
 var handlebars = require('gulp-compile-handlebars');
 var less = require('gulp-less');
@@ -211,6 +212,10 @@ gulp.task('handlebars', function() {
         .pipe(plugins.rename(function(path) {
             path.extname = '.html';
         }))
+        .pipe(htmlmin({
+            collapseWhitespace: true,
+            removeComments: true
+        }))
         .pipe(gulp.dest(dirs.dist));
 });
 
@@ -227,7 +232,8 @@ gulp.task('lint:js', function () {
 
 gulp.task('compress', function (cb) {
     pump([
-            gulp.src([dirs.src + '/js/**/*.js', '!' + dirs.src + '/js/require.config.js']),
+            gulp.src([dirs.src + '/js/**/*.js',
+                '!' + dirs.src + '/js/require.config.js']),
             uglify(),
             gulp.dest(dirs.dist + "/js")
         ],

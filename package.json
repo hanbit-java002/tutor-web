@@ -13,6 +13,7 @@
     "gulp-autoprefixer": "^3.0.2",
     "gulp-compile-handlebars": "^0.6.1",
     "gulp-header": "^1.2.2",
+    "gulp-html-minifier": "^0.1.8",
     "gulp-jscs": "^3.0.1",
     "gulp-jshint": "^2.0.0",
     "gulp-less": "^3.3.0",
