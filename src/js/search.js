@@ -113,18 +113,40 @@ require([
         resizeMap();
     });
 
+    function resizeSearchFilter() {
+        var height = $(window).height() - $("#main-bar").height();
+
+        $(".search-filter-layer").height(height);
+    }
+
+    function showSearchFilter() {
+        resizeSearchFilter();
+
+        $("body").css("overflow", "hidden");
+
+        $(".search-filter-layer").show();
+    }
+
+    function hideSearchFilter() {
+        $(".search-filter-layer").hide();
+
+        $("body").css("overflow", "");
+    }
+
+    $(window).on("resize", function() {
+        resizeSearchFilter();
+    });
+
     $("#filter").on("click", function() {
-         $(".search-filter").show();
+        showSearchFilter();
     });
 
-    $(".close-filter").on("click", function() {
-        $(".search-filter").hide();
+    $(".cancel-filter, .search-filter-layer").on("click", function() {
+        hideSearchFilter();
     });
 
-    $(".close-filter").on("mouseover", function() {
-        var newTop = $(this).position().top + 50;
-
-        $(this).css("top", newTop + "px");
+    $(".search-filter").on("click", function(event) {
+        event.stopPropagation();
     });
 
     initMap(tempList);

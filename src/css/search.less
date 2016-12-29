@@ -261,18 +261,102 @@ section.category>ul>li {
     margin: 5px;
 }
 
-.search-filter {
+.search-filter-layer {
     display: none;
     position: absolute;
     top: 0px;
     left: 0px;
-    width: calc(~"100% -" @search-info-width);
-    height: 100%;
-    background-color: #c0a16b;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 100;
 }
 
-.close-filter {
+.search-filter-box {
+    position: relative;
+    width: calc(~"100% -" @search-info-width);
+    height: 100%;
+}
+
+.search-filter {
+    position: relative;
+    width: 800px;
+    height: 100%;
+    @margin-auto-width();
+    background-color: white;
+}
+
+.sf-filters {
+    width: 100%;
+    height: calc(~"100% - 80px");
+    overflow-y: auto;
+    padding: 0px 20px;
+}
+
+.sf-filters>li {
+    padding: 15px 0px;
+    border-bottom: solid 1px #ddd;
+}
+
+.sf-filters>li:last-child {
+    border-bottom: 0;
+}
+
+.filter-title {
+    position: relative;
+    color: #333;
+    font-size: 20px;
+}
+
+.filter-multiple {
+    @abs-vmiddle();
+    right: 0px;
+    font-size: 14px;
+    color: #aaa;
+}
+
+.filter-order .select,
+.filter-parking .select {
+    padding: 0px 90px;
+}
+
+.filter-order .select>li,
+.filter-parking .select>li {
+    display: inline-block;
+    width: calc(~"50% - 20px");
+    margin: 10px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 16px;
+    text-align: center;
+    border: solid 2px #aaa;
+    border-radius: 20px;
+    color: #aaa;
+}
+
+.select>li.active {
+    border-color: @main-color;
+    color: @main-color;
+}
+
+.sf-buttons {
     position: absolute;
-    top: 50px;
-    left: 50px;
+    width: 100%;
+    height: 80px;
+    bottom: 0px;
+}
+
+.sf-buttons>button {
+    width: 50%;
+    height: 100%;
+    color: white;
+    font-size: 20px;
+    border: 0;
+}
+
+.sf-buttons .cancel-filter {
+    background-color: #aaa;
+}
+
+.sf-buttons .apply-filter {
+    background-color: @main-color;
 }
