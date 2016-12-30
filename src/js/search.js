@@ -124,11 +124,11 @@ require([
 
         $("body").css("overflow", "hidden");
 
-        $(".search-filter-layer").show();
+        $(".search-filter-layer").fadeIn();
     }
 
     function hideSearchFilter() {
-        $(".search-filter-layer").hide();
+        $(".search-filter-layer").fadeOut();
 
         $("body").css("overflow", "");
     }

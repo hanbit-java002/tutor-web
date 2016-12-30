@@ -144,6 +144,38 @@ require([
                 $("#title-desc").html(topList.desc);
 
                 initStoreList(topList);
+
+                function animatePath(obj, path) {
+                    var index = parseInt(Math.random() * 1000) % path.length;
+
+                    obj.animate({
+                        top: path[index].top,
+                        right: path[index].right,
+                        opacity: path[index].opacity
+                    }, {
+                        duration: path[index].duration,
+                        complete: function() {
+                            animatePath(obj, path, index + 1);
+                        }
+                    });
+                }
+
+                $(".store-star").on("click", function() {
+                    var path = [{
+                        top: 20, right: 20, duration: 100, opacity: 0.4
+                    }, {
+                        top: 0, right: 40, duration: 150, opacity: 1
+                    }, {
+                        top: 30, right: 70, duration: 200, opacity: 0.7
+                    }, {
+                        top: 0, right: 40, duration: 150, opacity: 1
+                    }, {
+                        top: 20, right: 20, duration: 500, opacity: 0
+                    }];
+
+                    animatePath($(this), path);
+                });
+
                 initMap(topList);
             }
         });
