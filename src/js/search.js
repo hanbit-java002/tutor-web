@@ -149,6 +149,33 @@ require([
         event.stopPropagation();
     });
 
+    $(".select-single>li").on("click", function() {
+        var select = $(this).parent("ul");
+        select.find("li").removeClass("active");
+
+        $(this).addClass("active");
+    });
+
+    $(".select-multiple>li").on("click", function() {
+        $(this).toggleClass("active");
+    });
+
+    $(".filter-region .select-tab>li").on("click", function() {
+        var select = $(this).parent("ul");
+
+        if ($(this).hasClass("tab-more")) {
+            return;
+        }
+
+        select.find("li").removeClass("active");
+        $(this).addClass("active");
+
+        var region = $(this).attr("region");
+
+        $(".region-details").hide();
+        $(".region-details[region='" + region + "']").show();
+    });
+
     initMap(tempList);
 
     common.initHotPlaces();
