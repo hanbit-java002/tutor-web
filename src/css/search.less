@@ -424,6 +424,7 @@ section.category>ul>li {
 }
 
 .tab-more-box {
+    display: none;
     position: absolute;
     top: calc(~"100% + 10px");
     left: 0px;
@@ -442,6 +443,18 @@ section.category>ul>li {
     width: 100%;
     line-height: 150%;
     font-size: 16px;
+}
+
+.tab-more-arrow {
+    position: absolute;
+    top: -18px;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    border-top: solid 1px #aaa;
+    border-right: solid 1px #aaa;
+    background-color: white;
+    transform: rotate(-45deg) translateX(-50%);
 }
 
 @region-detail-height: 40px;

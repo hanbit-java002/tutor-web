@@ -128,6 +128,7 @@ require([
     }
 
     function hideSearchFilter() {
+        $(".tab-more-box").hide();
         $(".search-filter-layer").fadeOut();
 
         $("body").css("overflow", "");
@@ -147,6 +148,8 @@ require([
 
     $(".search-filter").on("click", function(event) {
         event.stopPropagation();
+
+        $(".tab-more-box").hide();
     });
 
     $(".select-single>li").on("click", function() {
@@ -160,14 +163,17 @@ require([
         $(this).toggleClass("active");
     });
 
-    $(".filter-region .select-tab>li").on("click", function() {
-        var select = $(this).parent("ul");
+    $(".filter-region .select-tab>li").on("click", function(event) {
+        event.stopPropagation();
 
         if ($(this).hasClass("tab-more")) {
+            $(".tab-more-box").toggle();
             return;
         }
 
-        select.find("li").removeClass("active");
+        $(".tab-more-box").hide();
+
+        $(".filter-region .select-tab>li").removeClass("active");
         $(this).addClass("active");
 
         var region = $(this).attr("region");
