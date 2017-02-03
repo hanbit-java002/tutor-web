@@ -66,6 +66,63 @@ define([
         $(".hp-layer-popup").remove();
     }
 
+    function signUp() {
+        var userId = $("#hp-user-id").val();
+        var userPw = $("#hp-user-pw").val();
+        var userPwCfm = $("#hp-user-pw-cfm").val();
+
+        if (userId === undefined || userId === "") {
+            alert("아이디를 입력하세요.");
+            $("#hp-user-id").focus();
+            return;
+        }
+        else if (userPw === undefined || userPw === "") {
+            alert("비밀번호를 입력하세요.");
+            $("#hp-user-pw").focus();
+            return;
+        }
+        else if (userPw !== userPwCfm) {
+            alert("비밀번호 확인을 동일하게 입력하세요.");
+            $("#hp-user-pw-cfm").focus();
+            return;
+        }
+
+        $.ajax({
+            url: "/api2/member/signup",
+            method: "POST",
+            data: {
+                userId: userId,
+                userPw: userPw
+            },
+            success: function(data) {
+                alert(data.result);
+            },
+            error: function(jqXHR) {
+                alert(jqXHR.responseJSON.message);
+            }
+        });
+    }
+
+    function attachPopupEvents(layerName) {
+        if (layerName === "sign-up") {
+            $("#hp-member-sign-up").on("click", function() {
+                signUp();
+            });
+
+            $(".hp-reset").on("click", function() {
+                $("#hp-user-id").val("");
+                $("#hp-user-pw").val("");
+                $("#hp-user-pw-cfm").val("");
+
+                $("#hp-user-id").focus();
+            });
+        }
+
+        $(".hp-block-layer.ajax, .hp-popup-close").on("click", function() {
+            closeAjaxPopup();
+        });
+    }
+
     function openAjaxPopup(layerName) {
         $.ajax({
             url: "layers/" + layerName + ".html",
@@ -77,9 +134,9 @@ define([
 
                 $("body").append(html);
 
-                $(".hp-block-layer.ajax").on("click", function() {
-                    closeAjaxPopup();
-                });
+                $(".hp-popup-contents>input:first-child").focus();
+
+                attachPopupEvents(layerName);
             }
         });
     }
