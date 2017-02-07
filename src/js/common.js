@@ -116,11 +116,13 @@ define([
                 if (data.result === "yes") {
                     $(".hp-sign-up").hide();
                     $(".hp-sign-in").hide();
+                    $(".hp-member-info").show();
                     $(".hp-sign-out").show();
                 }
                 else {
                     $(".hp-sign-up").show();
                     $(".hp-sign-in").show();
+                    $(".hp-member-info").hide();
                     $(".hp-sign-out").hide();
                 }
             }
@@ -156,10 +158,47 @@ define([
 
                     $(".hp-sign-up").hide();
                     $(".hp-sign-in").hide();
+                    $(".hp-member-info").show();
                     $(".hp-sign-out").show();
                 }
                 else {
                     alert("정상적으로 로그인되지 않았습니다.");
+                }
+            },
+            error: function(jqXHR) {
+                alert(jqXHR.responseJSON.message);
+            }
+        });
+    }
+
+    function updateMemberInfo() {
+        var userPw = $("#hp-user-pw").val();
+        var userPwCfm = $("#hp-user-pw-cfm").val();
+
+        if (userPw === undefined || userPw === "") {
+            alert("비밀번호를 입력하세요.");
+            $("#hp-user-pw").focus();
+            return;
+        }
+        else if (userPw !== userPwCfm) {
+            alert("비밀번호 확인을 동일하게 입력하세요.");
+            $("#hp-user-pw-cfm").focus();
+            return;
+        }
+
+        $.ajax({
+            url: "/api2/member/update",
+            method: "POST",
+            data: {
+                userPw: userPw
+            },
+            success: function(data) {
+                if (data.result === "ok") {
+                    alert("정상적으로 수정되었습니다.");
+                    closeAjaxPopup();
+                }
+                else {
+                    alert("정상적으로 수정되지 않았습니다.");
                 }
             },
             error: function(jqXHR) {
@@ -185,6 +224,18 @@ define([
         else if (layerName === "sign-in") {
             $("#hp-member-sign-in").on("click", function() {
                 signIn();
+            });
+        }
+        else if (layerName === "member-info") {
+            $("#hp-member-info-update").on("click", function() {
+                updateMemberInfo();
+            });
+
+            $(".hp-reset").on("click", function() {
+                $("#hp-user-pw").val("");
+                $("#hp-user-pw-cfm").val("");
+
+                $("#hp-user-pw").focus();
             });
         }
 
@@ -227,12 +278,17 @@ define([
         openAjaxPopup("sign-in");
     });
 
+    $(".hp-member-info").on("click", function() {
+        openAjaxPopup("member-info");
+    });
+
     $(".hp-sign-out").on("click", function() {
         $.ajax({
             url: "/api2/member/signout",
             success: function() {
                 $(".hp-sign-up").show();
                 $(".hp-sign-in").show();
+                $(".hp-member-info").hide();
                 $(".hp-sign-out").hide();
             }
         });
