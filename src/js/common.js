@@ -95,7 +95,72 @@ define([
                 userPw: userPw
             },
             success: function(data) {
-                alert(data.result);
+                if (data.result === "ok") {
+                    alert(userId + "님 환영합니다.");
+                    closeAjaxPopup();
+                }
+                else {
+                    alert("정상적으로 가입되지 않았습니다.");
+                }
+            },
+            error: function(jqXHR) {
+                alert(jqXHR.responseJSON.message);
+            }
+        });
+    }
+
+    function checkSignedIn() {
+        $.ajax({
+            url: "/api2/member/signedin",
+            success: function(data) {
+                if (data.result === "yes") {
+                    $(".hp-sign-up").hide();
+                    $(".hp-sign-in").hide();
+                    $(".hp-sign-out").show();
+                }
+                else {
+                    $(".hp-sign-up").show();
+                    $(".hp-sign-in").show();
+                    $(".hp-sign-out").hide();
+                }
+            }
+        });
+    }
+
+    function signIn() {
+        var userId = $("#hp-user-id").val();
+        var userPw = $("#hp-user-pw").val();
+
+        if (userId === undefined || userId === "") {
+            alert("아이디를 입력하세요.");
+            $("#hp-user-id").focus();
+            return;
+        }
+        else if (userPw === undefined || userPw === "") {
+            alert("비밀번호를 입력하세요.");
+            $("#hp-user-pw").focus();
+            return;
+        }
+
+        $.ajax({
+            url: "/api2/member/signin",
+            method: "POST",
+            data: {
+                userId: userId,
+                userPw: userPw
+            },
+            success: function(data) {
+                if (data.result === "ok") {
+                    alert(userId + "님 환영합니다.");
+                    closeAjaxPopup();
+
+                    $(".hp-sign-up").hide();
+                    $(".hp-sign-in").hide();
+                    $(".hp-sign-out").show();
+                }
+                else {
+                    alert("정상적으로 로그인되지 않았습니다.");
+                }
             },
             error: function(jqXHR) {
                 alert(jqXHR.responseJSON.message);
@@ -115,6 +180,11 @@ define([
                 $("#hp-user-pw-cfm").val("");
 
                 $("#hp-user-id").focus();
+            });
+        }
+        else if (layerName === "sign-in") {
+            $("#hp-member-sign-in").on("click", function() {
+                signIn();
             });
         }
 
@@ -155,6 +225,17 @@ define([
 
     $(".hp-sign-in").on("click", function() {
         openAjaxPopup("sign-in");
+    });
+
+    $(".hp-sign-out").on("click", function() {
+        $.ajax({
+            url: "/api2/member/signout",
+            success: function() {
+                $(".hp-sign-up").show();
+                $(".hp-sign-in").show();
+                $(".hp-sign-out").hide();
+            }
+        });
     });
 
     $("#main-search, #top-search").on("keyup", function(event) {
@@ -220,6 +301,8 @@ define([
 
         return Math.min(zoom, maxZoom);
     }
+
+    checkSignedIn();
 
     return {
         initHotPlaces: initHotPlaces,
