@@ -50,7 +50,7 @@ define([
         nextAction = Action.RUN;
 
         $("body").append("<div id='santa' style='width:72px;height:72px;" +
-            "background-image: url(img/santa.png);z-index: 100;position: fixed;" +
+            "background-image: url(" + global.root + "/img/santa.png);z-index: 100;position: fixed;" +
             "top:0px;left:0px;'></div>");
     }
 

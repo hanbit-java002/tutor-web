@@ -1,15 +1,15 @@
 require.config({
-    baseUrl: "js",
+    baseUrl: global.root,
 
     paths: {
-        "async"         : "vendor/requirejs/async",
-        "console"       : "plugins",
-        "jquery"        : "vendor/jquery-{{JQUERY_VERSION}}.min",
-        "bootstrap"     : "vendor/bootstrap/js/bootstrap.min",
-        "clipboard"     : "vendor/clipboard/clipboard.min",
+        "async"         : "js/vendor/requirejs/async",
+        "console"       : "js/plugins",
+        "jquery"        : "js/vendor/jquery-{{JQUERY_VERSION}}.min",
+        "bootstrap"     : "js/vendor/bootstrap/js/bootstrap.min",
+        "clipboard"     : "js/vendor/clipboard/clipboard.min",
 
-        "common"        : "common",
-        "easteregg"     : "easteregg"
+        "common"        : "js/common",
+        "easteregg"     : "js/easteregg"
     },
 
     shim: {
