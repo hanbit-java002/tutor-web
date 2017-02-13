@@ -104,7 +104,12 @@ define([
                 }
             },
             error: function(jqXHR) {
-                alert(jqXHR.responseJSON.message);
+                if (jqXHR.status === 1500) {
+                    alert(JSON.parse(jqXHR.responseText).errorMsg);
+                }
+                else {
+                    alert(jqXHR.responseJSON.message);
+                }
             }
         });
     }
@@ -166,7 +171,12 @@ define([
                 }
             },
             error: function(jqXHR) {
-                alert(jqXHR.responseJSON.message);
+                if (jqXHR.status === 1500) {
+                    alert(JSON.parse(jqXHR.responseText).errorMsg);
+                }
+                else {
+                    alert(jqXHR.responseJSON.message);
+                }
             }
         });
     }
@@ -202,7 +212,12 @@ define([
                 }
             },
             error: function(jqXHR) {
-                alert(jqXHR.responseJSON.message);
+                if (jqXHR.status === 1500) {
+                    alert(JSON.parse(jqXHR.responseText).errorMsg);
+                }
+                else {
+                    alert(jqXHR.responseJSON.message);
+                }
             }
         });
     }
