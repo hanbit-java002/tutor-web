@@ -81,6 +81,8 @@ gulp.task('copy', [
     'copy:bootstrap',
     'copy:font-awesome',
     'copy:clipboard',
+    'copy:sockjs-client',
+    'copy:vertx3-eventbus-client',
     'copy:license',
     'copy:img',
     'copy:css',
@@ -138,6 +140,18 @@ gulp.task('copy:bootstrap', function () {
 gulp.task('copy:clipboard', function () {
     return gulp.src('node_modules/clipboard/dist/clipboard.min.js')
         .pipe(gulp.dest(dirs.dist + '/js/vendor/clipboard'));
+});
+
+gulp.task('copy:sockjs-client', function () {
+    return gulp.src('node_modules/sockjs-client/dist/sockjs.min.js')
+        .pipe(gulp.dest(dirs.dist + '/js/vendor/sockjs-client'));
+});
+
+gulp.task('copy:vertx3-eventbus-client', function () {
+    return gulp.src('node_modules/vertx3-eventbus-client/vertx-eventbus.js')
+        .pipe(uglify())
+        .pipe(plugins.rename('vertx-eventbus.min.js'))
+        .pipe(gulp.dest(dirs.dist + '/js/vendor/vertx-eventbus'));
 });
 
 gulp.task('copy:license', function () {

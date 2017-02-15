@@ -1,0 +1,35 @@
+{{set root="."}}
+<!DOCTYPE html>
+<html lang="{{lang}}">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>Pkjs</title>
+
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+    <link rel="stylesheet" href="{{root}}/css/normalize.css">
+    <link rel="stylesheet" href="{{root}}/js/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{root}}/js/vendor/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{root}}/css/talk.css">
+    <script src="{{root}}/js/vendor/modernizr-2.8.3.min.js"></script>
+</head>
+<body>
+
+<h1>Hanbit Talk</h1>
+<div class="msg-box"></div>
+<input type="text" class="msg-input">
+
+<script>
+    var global = {
+        root: "{{root}}",
+    };
+</script>
+<script src="{{root}}/js/vendor/requirejs/require.min.js"></script>
+<script src="{{root}}/js/require.config.js"></script>
+<script src="{{root}}/js/talk.js"></script>
+</body>
+</html>

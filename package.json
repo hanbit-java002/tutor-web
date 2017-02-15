@@ -30,7 +30,9 @@
     "normalize.css": "3.0.3",
     "pump": "^1.0.1",
     "requirejs": "^2.3.2",
-    "run-sequence": "^1.0.2"
+    "run-sequence": "^1.0.2",
+    "sockjs-client": "^1.1.2",
+    "vertx3-eventbus-client": "^3.3.3"
   },
   "engines": {
     "node": ">=0.10.0"
