@@ -1,5 +1,5 @@
 require.config({
-    baseUrl: global.root,
+    baseUrl: window._ctx.root,
 
     paths: {
         "async"         : "js/vendor/requirejs/async",

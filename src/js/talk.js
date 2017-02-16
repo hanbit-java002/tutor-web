@@ -1,9 +1,9 @@
 require([
-    "common",
+    "jquery",
     "vertx-eventbus",
 ], function() {
     var EventBus = require("vertx-eventbus");
-    var eb = new EventBus("/api/eventbus");
+    var eb = new EventBus("/ws");
 
     eb.onopen = function() {
         eb.registerHandler("hanbit.client", function(error, message) {
