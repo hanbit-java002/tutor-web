@@ -9,8 +9,11 @@ require([
         eb.registerHandler("hanbit.client", function(error, message) {
             $(".msg-box").append("<div class='msg-ip'>" + message.body.ip +
                 "</div><div>" + message.body.text + "</div>");
-            $(".msg-box").scrollTop($(".msg-box")[0].scrollHeight);
         });
+
+        setInterval(function() {
+            $(".msg-box").scrollTop($(".msg-box")[0].scrollHeight);
+        }, 300);
     };
 
     $(".msg-input").on("keyup", function(event) {
