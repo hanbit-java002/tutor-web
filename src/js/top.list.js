@@ -20,7 +20,7 @@ require([
 
                 sectionHTML = "<li>";
                 sectionHTML += "<div class=\"section-img\" " +
-                    "style=\"background-image: url('" + global.root + "/" + item.img + "')\"></div>";
+                    "style=\"background-image: url('" + window._ctx.root + "/" + item.img + "')\"></div>";
                 sectionHTML += "<div class=\"section-name\">";
                 sectionHTML += item.name;
                 sectionHTML += "</div>";
@@ -36,7 +36,7 @@ require([
             }
 
             $(".section-contents.section" + sectionCode + ">ul>li").on("click", function() {
-                location.href = global.root + "/sub/store.html";
+                location.href = window._ctx.root + "/sub/store.html";
             });
         }
         else if (sectionCode === "02") {
@@ -56,7 +56,7 @@ require([
                 var review = store.review;
 
                 var listHTML = "<li>";
-                listHTML += "<div class=\"store-img\" style=\"background-image: url('" + global.root + "/" + store.img + "')\"></div>";
+                listHTML += "<div class=\"store-img\" style=\"background-image: url('" + window._ctx.root + "/" + store.img + "')\"></div>";
                 listHTML += "<div class=\"store-contents\">";
                 listHTML += "<div class=\"store-title\">";
                 listHTML += "<span class=\"store-name\">" + (i+1) + ". " + store.name + "</span>";
@@ -64,7 +64,7 @@ require([
                 listHTML += "</div>";
                 listHTML += "<div class=\"store-addr\">" + store.address + "</div>";
                 listHTML += "<div class=\"store-review\">";
-                listHTML += "<div class=\"store-review-editor-pic\" style=\"background-image: url('" + global.root + "/" + review.editorPic + "')\"></div>";
+                listHTML += "<div class=\"store-review-editor-pic\" style=\"background-image: url('" + window._ctx.root + "/" + review.editorPic + "')\"></div>";
                 listHTML += "<div class=\"store-review-contents\">";
                 listHTML += "<span class=\"store-reivew-editor-name\">" + review.editorName + "</span>";
                 listHTML += " " + review.content;
@@ -137,7 +137,7 @@ require([
         }
 
         $.ajax({
-            url: global.root + "/api/toplists/chirstmas",
+            url: window._ctx.root + "/api/toplists/chirstmas",
             success: function(topList) {
                 $("#title-info").html(topList.clicks.toLocaleString() + " 클릭 | " + topList.date);
                 $("#title-text").html(topList.title);
@@ -189,14 +189,14 @@ require([
 
     function initRelatedArea() {
         $.ajax({
-            url: global.root + "/api/toplist/related",
+            url: window._ctx.root + "/api/toplist/related",
             success: function(items) {
                 addItems(items, "01");
             }
         });
 
         $.ajax({
-            url: global.root + "/api/toplist/keywords",
+            url: window._ctx.root + "/api/toplist/keywords",
             success: function(items) {
                 addItems(items, "02");
             }

@@ -6,7 +6,7 @@ require([
 
     $("#calc").on("click", function() {
         $.ajax({
-            url: global.root + "/api2/calc",
+            url: window._ctx.root + "/api2/calc",
             method: "GET",
             data: {
                 left: $("#leftNum").val(),

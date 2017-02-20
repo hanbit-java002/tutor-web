@@ -47,7 +47,7 @@ require([
 
                 sectionHTML = "<li>";
                 sectionHTML += "<div class='section-img-box' " +
-                    "style=\"background-image: url('" + global.root + "/" + item.img + "')\">";
+                    "style=\"background-image: url('" + window._ctx.root + "/" + item.img + "')\">";
                 sectionHTML += "<div class='layer-darker'>";
                 sectionHTML += "<div class='img-box-text'>";
                 sectionHTML += "<div class='img-box-title'>" + item.title + "</div>";
@@ -70,7 +70,7 @@ require([
 
                 sectionHTML = "<li>";
                 sectionHTML += "<div class='section-img-box' " +
-                    "style=\"background-image: url('" + global.root + "/" + item.img + "')\">";
+                    "style=\"background-image: url('" + window._ctx.root + "/" + item.img + "')\">";
                 sectionHTML += "<div class='layer-darker'>";
                 sectionHTML += "<div class='img-box-text'>";
                 sectionHTML += "<div class='img-box-title'>" + item.title + "</div>";
@@ -79,7 +79,7 @@ require([
                 sectionHTML += "</div>";
                 sectionHTML += "<div class='editor-box'>";
                 sectionHTML += "<div class='editor-pic' " +
-                    "style=\"background-image: url('" + global.root + "/" + item.editorPic + "')\"></div>";
+                    "style=\"background-image: url('" + window._ctx.root + "/" + item.editorPic + "')\"></div>";
                 sectionHTML += "<div class='editor-name'>";
                 sectionHTML += item.editorName;
                 sectionHTML += "</div>";
@@ -92,7 +92,7 @@ require([
             }
 
             $(".section-contents.section02>ul>li").on("click", function() {
-                location.href = global.root + "/hanbit_picks.html";
+                location.href = window._ctx.root + "/hanbit_picks.html";
             });
         }
         else if (sectionCode === "03" || sectionCode === "04" || sectionCode === "05") {
@@ -101,7 +101,7 @@ require([
 
                 sectionHTML = "<li>";
                 sectionHTML += "<div class=\"section-img\" " +
-                    "style=\"background-image: url('" + global.root + "/" + item.img + "')\"></div>";
+                    "style=\"background-image: url('" + window._ctx.root + "/" + item.img + "')\"></div>";
                 sectionHTML += "<div class=\"section-name\">";
                 sectionHTML += item.name;
                 sectionHTML += "</div>";
@@ -117,13 +117,13 @@ require([
             }
 
             $(".section-contents.section" + sectionCode + ">ul>li").on("click", function() {
-                location.href = global.root + "/sub/store.html";
+                location.href = window._ctx.root + "/sub/store.html";
             });
         }
     }
 
     function initSection(sectionCode) {
-        var url = global.root;
+        var url = window._ctx.root;
 
         if (sectionCode === "01" || sectionCode === "02") {
             url += "/api2";
@@ -153,7 +153,7 @@ require([
         else if (sectionCode === "03" || sectionCode === "04" || sectionCode === "05") {
             if (sectionCode === "05") {
                 $.ajax({
-                    url: global.root + "/api/main/section/" + sectionCode + "/categories",
+                    url: window._ctx.root + "/api/main/section/" + sectionCode + "/categories",
                     success: function(categories) {
                         var maxCategories = sectionInfo[sectionCode].maxCategories;
 
@@ -187,7 +187,7 @@ require([
 
         var mainImgSrc = mainImgList[mainImgIndex];
 
-        $("#main-top").css("background-image", "url('" + global.root + "/" + mainImgSrc + "')");
+        $("#main-top").css("background-image", "url('" + window._ctx.root + "/" + mainImgSrc + "')");
 
         clearTimeout(timer);
         timer = setTimeout(rotateMainImg, 3000);
@@ -195,7 +195,7 @@ require([
 
     function getMainImgs() {
         $.ajax({
-            url: global.root + "/api2/main/imgs",
+            url: window._ctx.root + "/api2/main/imgs",
             success: function(imgList) {
                 mainImgList = imgList;
 

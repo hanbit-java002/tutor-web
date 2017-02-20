@@ -19,7 +19,7 @@ define([
     }
 
     function search() {
-        location.href = global.root + "/search.html";
+        location.href = window._ctx.root + "/search.html";
     }
 
     function clearSearchKeywords() {
@@ -88,7 +88,7 @@ define([
         }
 
         $.ajax({
-            url: global.root + "/api2/member/signup",
+            url: window._ctx.root + "/api2/member/signup",
             method: "POST",
             data: {
                 userId: userId,
@@ -116,7 +116,7 @@ define([
 
     function checkSignedIn() {
         $.ajax({
-            url: global.root + "/api2/member/signedin",
+            url: window._ctx.root + "/api2/member/signedin",
             success: function(data) {
                 if (data.result === "yes") {
                     $(".hp-sign-up").hide();
@@ -150,7 +150,7 @@ define([
         }
 
         $.ajax({
-            url: global.root + "/api2/member/signin",
+            url: window._ctx.root + "/api2/member/signin",
             method: "POST",
             data: {
                 userId: userId,
@@ -197,7 +197,7 @@ define([
         }
 
         $.ajax({
-            url: global.root + "/api2/member/update",
+            url: window._ctx.root + "/api2/member/update",
             method: "POST",
             data: {
                 userPw: userPw
@@ -261,7 +261,7 @@ define([
 
     function openAjaxPopup(layerName) {
         $.ajax({
-            url: global.root + "/layers/" + layerName + ".html",
+            url: window._ctx.root + "/layers/" + layerName + ".html",
             success: function(html) {
                 $("body").css("overflow", "hidden");
 
@@ -278,7 +278,7 @@ define([
     }
 
     $("#main-logo").on("click", function() {
-        location.href = global.root + "/";
+        location.href = window._ctx.root + "/";
     });
 
     $(".hp-member").on("click", function() {
@@ -299,7 +299,7 @@ define([
 
     $(".hp-sign-out").on("click", function() {
         $.ajax({
-            url: global.root + "/api2/member/signout",
+            url: window._ctx.root + "/api2/member/signout",
             success: function() {
                 $(".hp-sign-up").show();
                 $(".hp-sign-in").show();
@@ -334,7 +334,7 @@ define([
 
     function initHotPlaces() {
         $.ajax({
-            url: global.root + "/api/common/hotplaces",
+            url: window._ctx.root + "/api/common/hotplaces",
             success: function(hotPlaces) {
                 addHotPlaces(hotPlaces);
             }
