@@ -248,3 +248,65 @@
 .section-paging>ul>li.active {
     color: @main-color;
 }
+
+@media (max-width: 700px) {
+    #main-top {
+        height: 150px;
+    }
+
+    #main-text {
+        display: none;
+    }
+
+    #main-top-body {
+        padding-top: (@mainbar-height + 20px);
+    }
+
+    #main-search {
+        height: 26px;
+        padding-left: 27px;
+        padding-right: 105px;
+        font-size: 12px;
+    }
+
+    #main-search-form {
+        width: 90%;
+    }
+
+    #main-search-form>i.fa-search {
+        top: 5px;
+        left: 10px;
+        font-size: 16px;
+    }
+
+    #main-search-btn {
+        width: 100px;
+        height: 26px;
+        border-radius: 13px;
+        font-size: 12px;
+    }
+
+    #main-content>section {
+        padding: 5px;
+    }
+
+    .section-title {
+        padding: 0px 0px 0px 20px;
+    }
+
+    .section-contents>ul {
+        padding: 0;
+    }
+
+    .section-contents.section01>ul>li,
+    .section-contents.section02>ul>li,
+    .section-contents.section03>ul>li,
+    .section-contents.section04>ul>li,
+    .section-contents.section05>ul>li {
+        width: 100%;
+    }
+
+    .section-paging-arrow {
+        display: none;
+    }
+}

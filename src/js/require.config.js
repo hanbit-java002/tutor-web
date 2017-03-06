@@ -11,7 +11,7 @@ require.config({
         "vertx-eventbus": "js/vendor/vertx-eventbus/vertx-eventbus.min",
 
         "common"        : "js/common",
-        "easteregg"     : "js/easteregg"
+        "easteregg"     : "js/easteregg",
     },
 
     shim: {

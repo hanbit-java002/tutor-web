@@ -1,5 +1,5 @@
 require([
-    "common"
+    "common",
 ], function () {
 
     var common = require("common");
@@ -205,7 +205,10 @@ require([
     }
 
     function toggleHeader() {
-        if (document.body.scrollTop >= 430) {
+        var scrollTop = document.body.scrollTop;
+
+        if (($("body").width() <= 700 && scrollTop >= 35) ||
+            scrollTop >= 430) {
             $("#main-bar").removeClass("header-transparent");
         }
         else {
