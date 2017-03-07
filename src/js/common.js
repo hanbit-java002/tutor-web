@@ -334,7 +334,7 @@ define([
 
     function initHotPlaces() {
         $.ajax({
-            url: window._ctx.root + "/api/common/hotplaces",
+            url: window._ctx.root + "/api2/common/hotplaces",
             success: function(hotPlaces) {
                 addHotPlaces(hotPlaces);
             }

@@ -124,15 +124,7 @@ require([
 
     function initSection(sectionCode) {
         var url = window._ctx.root;
-
-        if (sectionCode === "01" || sectionCode === "02") {
-            url += "/api2";
-        }
-        else {
-            url += "/api";
-        }
-
-        url += "/main/section/" + sectionCode + "/items";
+        url += "/api2/main/section/" + sectionCode + "/items";
 
         if (sectionCode === "01") {
             $.ajax({
@@ -153,7 +145,7 @@ require([
         else if (sectionCode === "03" || sectionCode === "04" || sectionCode === "05") {
             if (sectionCode === "05") {
                 $.ajax({
-                    url: window._ctx.root + "/api/main/section/" + sectionCode + "/categories",
+                    url: window._ctx.root + "/api2/main/section/" + sectionCode + "/categories",
                     success: function(categories) {
                         var maxCategories = sectionInfo[sectionCode].maxCategories;
 
