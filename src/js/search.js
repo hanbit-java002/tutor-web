@@ -26,20 +26,23 @@ require([
             zoom: 15
         });
 
-        for (var i=0;i<list.stores.length;i++) {
-            var store = list.stores[i];
+        for (var i=0;i<list.length;i++) {
+            var store = list[i];
 
             // Create a marker and set its position.
             var marker = new google.maps.Marker({
                 map: mapInfo.map,
-                position: store.latLng,
+                position: {
+                    lat: store.lat,
+                    lng: store.lng,
+                },
                 title: store.name
             });
 
-            minLat = Math.min(minLat, store.latLng.lat);
-            maxLat = Math.max(maxLat, store.latLng.lat);
-            minLng = Math.min(minLng, store.latLng.lng);
-            maxLng = Math.max(maxLng, store.latLng.lng);
+            minLat = Math.min(minLat, store.lat);
+            maxLat = Math.max(maxLat, store.lat);
+            minLng = Math.min(minLng, store.lng);
+            maxLng = Math.max(maxLng, store.lng);
 
             if (false) {
                 console.log(marker);
@@ -69,22 +72,6 @@ require([
             configureMap(list);
         });
     }
-
-    var tempList = {
-        "stores": [{
-            "name": "본앤브레드",
-            "latLng": {
-                "lat": 37.570392,
-                "lng": 127.041688
-            }
-        }, {
-            "name": "갑이다짬뽕",
-            "latLng": {
-                "lat": 37.5573377,
-                "lng": 126.935609
-            }
-        }]
-    };
 
     $("#map-control").on("click", function() {
         mapInfo.isBig = !mapInfo.isBig;
@@ -182,8 +169,6 @@ require([
         $(".region-details[region='" + region + "']").show();
     });
 
-    initMap(tempList);
-
     function clearStores() {
         $(".search-list section.list .stores").empty();
     }
@@ -235,6 +220,8 @@ require([
                 clearStores();
 
                 var list = result.list;
+
+                initMap(list);
 
                 for (var i=0; i<list.length; i++) {
                     var store = list[i];
