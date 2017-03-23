@@ -1,6 +1,5 @@
 define([
     "bootstrap",
-    "easteregg"
 ], function () {
     function resizeHeaderSearch() {
         var mainLogoWidth = $("#main-logo").outerWidth();
@@ -18,12 +17,23 @@ define([
         resizeHeaderSearch();
     }
 
-    function search() {
-        location.href = window._ctx.root + "/search.html";
+    function clearSearchKeywords() {
+        $(".search-input").val("");
     }
 
-    function clearSearchKeywords() {
-        $("#main-search, #top-search").val("");
+    function search() {
+        var keyword = $(".search-input").val().trim();
+
+        if (keyword === "") {
+            alert("검색어를 입력하세요.");
+            clearSearchKeywords();
+            $(".search-input").focus();
+            return;
+        }
+
+        keyword = encodeURIComponent(keyword);
+
+        location.href = window._ctx.root + "/search.html?keyword=" + keyword;
     }
 
     var popupCssSelector = "";

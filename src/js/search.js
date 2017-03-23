@@ -184,5 +184,68 @@ require([
 
     initMap(tempList);
 
+    function clearStores() {
+        $(".search-list section.list .stores").empty();
+    }
+
+    function appendStore(store) {
+        var storeHTML = "";
+
+        storeHTML += "<li>";
+        storeHTML += "<div class='store-img' style='background-image: url(" +
+            store.img + ")'></div>";
+        storeHTML += "<div class='store-text'>";
+        storeHTML += "<div class='store-name'>";
+        storeHTML += store.name;
+        storeHTML += "</div>";
+        storeHTML += "<div class='store-score'>";
+        storeHTML += store.score.toFixed(1);
+        storeHTML += "</div>";
+        storeHTML += "<div class='store-info'>";
+        storeHTML += store.location + " - " + store.category;
+        storeHTML += "</div>";
+        storeHTML += "<div class='store-views'>";
+        storeHTML += "<i class='fa fa-eye'></i>";
+        storeHTML += store.view_cnt;
+        storeHTML += "</div>";
+        storeHTML += "<div class='store-reviews'>";
+        storeHTML += "<i class='fa fa-pencil'></i>";
+        storeHTML += "0";
+        storeHTML += "</div>";
+        storeHTML += "</div>";
+        storeHTML += "</li>";
+
+        $(".search-list section.list .stores").append(storeHTML);
+    }
+
+    function initSearch() {
+        var urlSearchParams = new window.URLSearchParams(location.search);
+        var keyword = urlSearchParams.get("keyword");
+
+        $(".search-keyword").text(keyword);
+
+        $.ajax({
+            url: "/api2/store/search",
+            data: {
+                keyword: keyword,
+                page: 1,
+                rowsPerPage: 10,
+            },
+            success: function(result) {
+                clearStores();
+
+                var list = result.list;
+
+                for (var i=0; i<list.length; i++) {
+                    var store = list[i];
+
+                    appendStore(store);
+                }
+            },
+        });
+    }
+
+    initSearch();
+
     common.initHotPlaces();
 });

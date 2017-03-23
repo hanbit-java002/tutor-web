@@ -99,7 +99,7 @@ require([
             for (i=startIndex;i<endIndex;i++) {
                 item = items[i];
 
-                sectionHTML = "<li>";
+                sectionHTML = "<li store-id='" + item.id + "'>";
                 sectionHTML += "<div class=\"section-img\" " +
                     "style=\"background-image: url('" + window._ctx.root + "/" + item.img + "')\"></div>";
                 sectionHTML += "<div class=\"section-name\">";
@@ -117,7 +117,9 @@ require([
             }
 
             $(".section-contents.section" + sectionCode + ">ul>li").on("click", function() {
-                location.href = window._ctx.root + "/sub/store.html";
+                var storeId = $(this).attr("store-id");
+
+                location.href = window._ctx.root + "/sub/store.html#" + storeId;
             });
         }
     }
